@@ -16,6 +16,8 @@ import Service from "../pages/adminPages/Service";
 import AddRoom from "../pages/adminPages/AddRoom";
 import AllRoom from "../pages/adminPages/AllRoom";
 import UpdateRoom from "../pages/adminPages/UpdateRoom";
+import MainHalls from "../pages/MainHalls";
+import Hall from "../pages/Hall";
 //import PersistLogin from "../components/HOC/PersistLogin";
 //import NotProtectdRoute from "../components/HOC/withNotProtect";
 
@@ -39,6 +41,18 @@ const router = createBrowserRouter([
         path: "/aboutUs",
         element: <About />,
       },
+      {
+        path: "/halls",
+        element: <MainHalls />,
+      },
+      {
+        path: "/halls/family",
+        element: <Hall hallType="family" />,
+      },
+      {
+        path: "/halls/company",
+        element: <Hall hallType="company" />,
+      },
     ],
     //},
     //],
@@ -54,28 +68,28 @@ const router = createBrowserRouter([
       },
       {
         path: "roomtype",
-        element: < RoomType />,
+        element: <RoomType />,
       },
       {
         path: "allamenities",
-        element: < AllAmenities />,
+        element: <AllAmenities />,
       },
       {
         path: "allservice",
-        element: < Service />,
+        element: <Service />,
       },
       {
         path: "addroom",
-        element: < AddRoom />,
+        element: <AddRoom />,
       },
       {
         path: "allroom",
-        element: < AllRoom />,
+        element: <AllRoom />,
       },
       {
         path: "updateroom/:id",
-        element: < UpdateRoom />,
-      }
+        element: <UpdateRoom />,
+      },
     ],
   },
   {

@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Jost:ital,wght@0,100..900;1,100..900&family=Reem+Kufi:wght@400..700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,6 +9,7 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
 
 .my-shadow {
   box-shadow: inset 0px 0px 54px 33px rgba(11, 71, 71, 1);
@@ -34,7 +34,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* لون مع شفافية */
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
 }
 
@@ -77,17 +77,19 @@ body {
   transform-style: preserve-3d;
   transition: transform 1.4s ease;
 }
+
 .card-animation:hover {
   transform: rotateY(180deg);
 }
+
 .backface-hidden {
   backface-visibility: hidden;
 }
 
-.clc-width-244{
+.clc-width-244 {
   width: calc(100% - 244px);
 }
 
-.clc-width-70{
+.clc-width-70 {
   width: calc(100% - 70px);
 }

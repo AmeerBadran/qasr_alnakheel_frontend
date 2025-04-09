@@ -19,7 +19,7 @@ export default {
         'reem-kufi': ['"Reem Kufi"', 'sans-serif'],
       },
       colors: {
-        'my-color': '#000000',
+        'my-color': '#212121',
         'sec-color': '#de8e16'
       },
     },

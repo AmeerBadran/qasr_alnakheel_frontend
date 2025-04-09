@@ -7,6 +7,60 @@ import { store } from '../app/store';
 const resources = {
   en: {
     translation: {
+      "conferenceFeatures": {
+        "central_location": {
+          "title": "Central Location",
+          "description": "Located in the heart of the city, easily accessible by public and private transport."
+        },
+        "modern_equipment": {
+          "title": "Modern Equipment",
+          "description": "Equipped with high-quality projectors, sound systems, and lighting for professional presentations."
+        },
+        "flexible_seating": {
+          "title": "Flexible Seating Arrangements",
+          "description": "Configurable layouts including theater, classroom, U-shape, and banquet styles."
+        },
+        "high_speed_internet": {
+          "title": "High-Speed Internet",
+          "description": "Stable and fast Wi-Fi connection to support video conferencing and online collaboration."
+        },
+        "on_site_catering": {
+          "title": "On-site Catering Services",
+          "description": "Coffee breaks, snacks, and full meal options available upon request."
+        },
+        "event_support": {
+          "title": "Dedicated Event Support Team",
+          "description": "Professional staff available to assist before and during the event."
+        },
+        "parking": {
+          "title": "Ample Parking Space",
+          "description": "Secure parking area for guests and attendees."
+        },
+        "quiet_environment": {
+          "title": "Quiet and Private Environment",
+          "description": "Ideal setting for focused discussions and productive meetings."
+        },
+        "acoustic_design": {
+          "title": "Acoustic Optimization",
+          "description": "Soundproofed walls and acoustic design to ensure clear communication."
+        },
+        "tech_friendly": {
+          "title": "Tech-Friendly Setup",
+          "description": "Multiple power outlets, charging stations, and AV connectivity options."
+        }
+      },
+      "family": {
+        "title": "Family Halls",
+        "subtitle": "Weddings and private celebrations",
+        "description": "Elegant spaces designed for family gatherings, weddings, and memorable private parties.",
+        "buttonText": "Discover Now"
+      },
+      "company": {
+        "title": "Corporate Halls",
+        "subtitle": "Conferences and business meetings",
+        "description": "Professional venues ideal for company events, formal meetings, and corporate functions.",
+        "buttonText": "Discover Now"
+      },
       "welcome": "Welcome to our website",
       "change_language": "Change Language",
       "headerServices": "Add Service +",
@@ -68,6 +122,7 @@ const resources = {
         "view_details": "View details",
         "delete": "Delete"
       },
+      
 
       "add_room": {
         "title": "Create Room",
@@ -103,6 +158,7 @@ const resources = {
           "saturday": "Saturday",
           "sunday": "Sunday"
         },
+        
         "actions": {
           "upload_featured": "Click to upload featured image",
           "upload_additional": "Click to upload additional images",
@@ -126,63 +182,63 @@ const resources = {
         }
       },
 
-  "update_room": {
-    "title": "Update Room",
-    "form": {
-      "labels": {
-        "room_no": "Room Number",
-        "type": "Room Type",
-        "capacity": "Capacity",
-        "room_length": "Room Length",
-        "num_of_baths": "Number of Baths",
-        "adult_guests": "Adult Guests",
-        "child_guests": "Child Guests",
-        "category_ar": "Category (Arabic)",
-        "category_en": "Category (English)",
-        "bed_type_ar": "Bed Type (Arabic)",
-        "bed_type_en": "Bed Type (English)"
+      "update_room": {
+        "title": "Update Room",
+        "form": {
+          "labels": {
+            "room_no": "Room Number",
+            "type": "Room Type",
+            "capacity": "Capacity",
+            "room_length": "Room Length",
+            "num_of_baths": "Number of Baths",
+            "adult_guests": "Adult Guests",
+            "child_guests": "Child Guests",
+            "category_ar": "Category (Arabic)",
+            "category_en": "Category (English)",
+            "bed_type_ar": "Bed Type (Arabic)",
+            "bed_type_en": "Bed Type (English)"
+          },
+          "submit": "Update"
+        },
+        "messages": {
+          "success": "Room updated successfully!",
+          "error": "Failed to update room",
+          "unknown_error": "An unknown error occurred"
+        }
       },
-      "submit": "Update"
-    },
-    "messages": {
-      "success": "Room updated successfully!",
-      "error": "Failed to update room",
-      "unknown_error": "An unknown error occurred"
-    }
-  },
-  "shared": {
-    "buttons": {
-      "update": "Update"
-    }
-  },
+      "shared": {
+        "buttons": {
+          "update": "Update"
+        }
+      },
 
 
       "pricing": {
-    "title": {
-      "update": "Update Pricing"
-    },
-    "actions": {
-      "apply_uniform": "Apply Same Price for All Days"
-    },
-    "success": {
-      "updated": "Pricing updated successfully!"
-    },
-    "errors": {
-      "load_failed": "Failed to load pricing data",
-      "update_failed": "Failed to update pricing"
-    }
-  },
-  "days": {
-    "sunday": "Sunday",
-    "monday": "Monday",
-    "tuesday": "Tuesday",
-    "wednesday": "Wednesday",
-    "thursday": "Thursday",
-    "friday": "Friday",
-    "saturday": "Saturday"
-  },
-  "currency": "SAR",
-  "room": "Room"
+        "title": {
+          "update": "Update Pricing"
+        },
+        "actions": {
+          "apply_uniform": "Apply Same Price for All Days"
+        },
+        "success": {
+          "updated": "Pricing updated successfully!"
+        },
+        "errors": {
+          "load_failed": "Failed to load pricing data",
+          "update_failed": "Failed to update pricing"
+        }
+      },
+      "days": {
+        "sunday": "Sunday",
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday"
+      },
+      "currency": "SAR",
+      "room": "Room"
 
     }
   },
@@ -298,51 +354,105 @@ const resources = {
         "errors": {
           "load_types": "فشل تحميل أنواع الغرف",
           "create_failed": "فشل إنشاء الغرفة"
-        }
+        },
+       
       },
-
-   //updateroom
+      "family": {
+        "title": "القاعات العائلية",
+        "subtitle": "للحفلات الخاصة والأعراس",
+        "description": "مساحات أنيقة مصممة للتجمعات العائلية، الأعراس، والحفلات الخاصة التي لا تُنسى.",
+        "buttonText": "استكشف الآن"
+      },
+      "company": {
+        "title": "قاعات المناسبات والشركات",
+        "subtitle": "للاجتماعات والمؤتمرات",
+        "description": "أماكن احترافية مثالية للفعاليات الرسمية، اجتماعات العمل، والمناسبات الخاصة بالشركات.",
+        "buttonText": "استكشف الآن"
+      },
+      //updateroom
 
       "pricing": {
-    "title": {
-      "update": "تحديث الأسعار"
-    },
-    "actions": {
-      "apply_uniform": "تطبيق نفس السعر لجميع الأيام"
-    },
-    "success": {
-      "updated": "تم تحديث الأسعار بنجاح!"
-    },
-    "errors": {
-      "load_failed": "فشل تحميل بيانات الأسعار",
-      "update_failed": "فشل تحديث الأسعار"
-    },
-    "current_type": "نوع الغرفة"
-  },
-  "days": {
-    "sunday": "الأحد",
-    "monday": "الإثنين",
-    "tuesday": "الثلاثاء",
-    "wednesday": "الأربعاء",
-    "thursday": "الخميس",
-    "friday": "الجمعة",
-    "saturday": "السبت"
-  },
-  "currency": "ر.س",
-  "room": "غرفة",
-  "validation": {
-    "required": "هذا الحقل مطلوب",
-    "min_value": "يجب أن تكون القيمة على الأقل {min}",
-    "max_value": "يجب أن تكون القيمة على الأكثر {max}",
-    "positive": "يجب أن تكون القيمة موجبة"
-  },
-  "actions": {
-    "reset": "إعادة تعيين",
-    "update": "تحديث",
-    "updating": "جاري التحديث...",
-    "cancel": "إلغاء"
-  },
-  "loading": "جاري التحميل..."
+        "title": {
+          "update": "تحديث الأسعار"
+        },
+        "actions": {
+          "apply_uniform": "تطبيق نفس السعر لجميع الأيام"
+        },
+        "success": {
+          "updated": "تم تحديث الأسعار بنجاح!"
+        },
+        "errors": {
+          "load_failed": "فشل تحميل بيانات الأسعار",
+          "update_failed": "فشل تحديث الأسعار"
+        },
+        "current_type": "نوع الغرفة"
+      },
+      "days": {
+        "sunday": "الأحد",
+        "monday": "الإثنين",
+        "tuesday": "الثلاثاء",
+        "wednesday": "الأربعاء",
+        "thursday": "الخميس",
+        "friday": "الجمعة",
+        "saturday": "السبت"
+      },
+      "currency": "ر.س",
+      "room": "غرفة",
+      "validation": {
+        "required": "هذا الحقل مطلوب",
+        "min_value": "يجب أن تكون القيمة على الأقل {min}",
+        "max_value": "يجب أن تكون القيمة على الأكثر {max}",
+        "positive": "يجب أن تكون القيمة موجبة"
+      },
+      "actions": {
+        "reset": "إعادة تعيين",
+        "update": "تحديث",
+        "updating": "جاري التحديث...",
+        "cancel": "إلغاء"
+      },
+      "loading": "جاري التحميل...",
+      "conferenceFeatures": {
+        "central_location": {
+          "title": "موقع مركزي",
+          "description": "يقع في قلب المدينة، ويمكن الوصول إليه بسهولة عبر وسائل النقل العامة والخاصة."
+        },
+        "modern_equipment": {
+          "title": "معدات حديثة",
+          "description": "مزود بأجهزة عرض وصوت وإضاءة عالية الجودة للعروض التقديمية الاحترافية."
+        },
+        "flexible_seating": {
+          "title": "ترتيب مقاعد مرن",
+          "description": "ترتيبات متنوعة تشمل النمط المسرحي، الفصلي، شكل U، ونمط الولائم."
+        },
+        "high_speed_internet": {
+          "title": "إنترنت عالي السرعة",
+          "description": "اتصال Wi-Fi سريع ومستقر لدعم الاجتماعات عبر الإنترنت والتعاون الرقمي."
+        },
+        "on_site_catering": {
+          "title": "خدمات تموين داخلية",
+          "description": "استراحات قهوة ووجبات خفيفة وخيارات وجبات كاملة متاحة حسب الطلب."
+        },
+        "event_support": {
+          "title": "فريق دعم فعاليات مخصص",
+          "description": "طاقم احترافي متوفر لتقديم الدعم قبل وأثناء الفعالية."
+        },
+        "parking": {
+          "title": "مواقف سيارات واسعة",
+          "description": "منطقة مواقف آمنة للضيوف والحضور."
+        },
+        "quiet_environment": {
+          "title": "بيئة هادئة وخاصة",
+          "description": "مكان مثالي للنقاشات المركزة والاجتماعات المثمرة."
+        },
+        "acoustic_design": {
+          "title": "عزل صوتي مثالي",
+          "description": "جدران عازلة للصوت وتصميم صوتي لضمان وضوح التواصل."
+        },
+        "tech_friendly": {
+          "title": "تجهيز تقني متكامل",
+          "description": "منافذ كهربائية متعددة، محطات شحن، وخيارات اتصال صوتي ومرئي."
+        }
+      }
     }
   }
 };

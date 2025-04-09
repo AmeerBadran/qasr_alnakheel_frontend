@@ -32,7 +32,7 @@ function Navbar() {
   };
 
   return (
-    <div className="w-full absolute z-50 border-b shadow-xl bg-[#000000]">
+    <div className="w-full absolute z-50 border-b border-gray-600 shadow-xl bg-my-color">
       <header
         className={` max-w-[1400px] mx-auto flex items-center justify-between h-24 px-4 relative`}
       >
