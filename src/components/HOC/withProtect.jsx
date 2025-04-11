@@ -8,8 +8,8 @@ export default function ProtectedRoute({ element }) {
   const navigate = useNavigate();
   const authData = useSelector((state) => state.authData);
   const userId = authData?.userId;
-  const userRole = authData?.userData?.role;
-
+  const userRole = authData?.userRole;
+console.log(authData);
   useEffect(() => {
     if (userId && userRole !== "admin") {
       toast.warn("You do not have permission to access this link.");

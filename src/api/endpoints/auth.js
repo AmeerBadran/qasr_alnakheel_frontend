@@ -8,24 +8,28 @@ export const logIn = (loginData) => {
 }
 
 export const logOut = () => {
+  console.log("object")
   return axiosInstance.post('/auth/logout', {}, {
     withCredentials: true
   });
 }
 
 export const signUp = (signUpData) => {
-  return axiosInstance.post('/auth/signup', signUpData, {
+  return axiosInstance.post('/auth/', signUpData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
 }
 
-export const getUserData = () => {
-  return axiosInstance.get('/auth/')
+export const sendVerificationCode = (email) => {
+  return axiosInstance.post('/auth/sendVerificationCode', { email })
 }
 
-export const verifyEmail = (id, email) => {
-  email = "abad@gmail.com"
-  return axiosInstance.post(`/auth/sendVerificationCode/${id}`, { email })
+export const verifyCode = (data) => {
+  return axiosInstance.post('/auth/verifyAccount', data)
+}
+
+export const getUserData = () => {
+  return axiosInstance.get('/auth/', { withCredentials: true })
 }

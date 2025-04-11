@@ -2,6 +2,7 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 const SidebarItem = ({
   linkType,
@@ -11,6 +12,7 @@ const SidebarItem = ({
   label,
   iconColor,
 }) => {
+  const { i18n, t } = useTranslation("sidebar");
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const handleToggleDropdown = () => {
@@ -20,26 +22,31 @@ const SidebarItem = ({
   return (
     <li
       className={`group transition-all duration-500 ${
-        sidebarSize === "big" ? "pr-5" : sidebarSize === "small" ? "pr-2" : ""
+        sidebarSize === "big" ? "pe-5" : sidebarSize === "small" ? "pe-2" : ""
       }`}
     >
       {linkType === "link" ? (
         <NavLink
           to={data.to}
-          className={`flex items-center py-[6px] w-full rounded-r-full group-hover:bg-[#0F1015] transition-all duration-300 ${
-            sidebarSize === "big"
-              ? "px-5"
-              : sidebarSize === "small"
-              ? "px-4"
-              : ""
-          }`}
+          className={({ isActive }) => `
+            flex items-center py-1.5 w-full
+            group-hover:bg-[#0F1015] transition-all duration-300
+            ${isActive ? "bg-[#0F1015]" : ""}
+            ${
+              sidebarSize === "big"
+                ? "ps-5 pe-4"
+                : sidebarSize === "small"
+                ? "ps-4 pe-3"
+                : ""
+            } ${i18n.dir() === "rtl" ? "rounded-e-full" : "rounded-l-full"}
+          `}
         >
-          <div className="p-[8px] bg-[#4b506844] rounded-full mr-3 group-hover:bg-[#22242E] transition-all duration-500">
-            <data.icon className={`text-mg ${data.iconColor}`} />
+          <div className="p-2 bg-[#4b506844] rounded-full me-3 group-hover:bg-[#22242E] transition-all duration-500">
+            <data.icon className={`text-lg ${data.iconColor}`} />
           </div>
           {sidebarSize === "big" && (
             <p className="text-[#6c7293] group-hover:text-white transition-all duration-300">
-              {data.label}
+              {t(data.label)}
             </p>
           )}
         </NavLink>
@@ -47,42 +54,53 @@ const SidebarItem = ({
         <div>
           <button
             onClick={handleToggleDropdown}
-            className={`flex items-center py-[6px] w-full rounded-r-full group-hover:bg-[#0F1015] transition-all duration-300 ${
-              sidebarSize === "big"
-                ? "px-5"
-                : sidebarSize === "small"
-                ? "px-4"
-                : ""
-            }`}
+            className={`flex items-center py-1.5 w-full group-hover:bg-[#0F1015] transition-all duration-300
+              ${openDropdown ? "bg-[#3b3f52]" : ""}
+              ${
+                sidebarSize === "big"
+                  ? "ps-5 pe-4"
+                  : sidebarSize === "small"
+                  ? "ps-4 pe-3"
+                  : ""
+              }
+              ${i18n.dir() === "rtl" ? "rounded-e-full" : "rounded-l-full"}
+            `}
           >
-            <div className="p-[8px] bg-[#4b506844] rounded-full mr-3 group-hover:bg-[#22242E] transition-all duration-500">
-              <Icon className={`text-mg ${iconColor}`} />
+            <div className="p-2 bg-[#4b506844] rounded-full me-3 group-hover:bg-[#22242E] transition-all duration-500">
+              <Icon className={`text-lg ${iconColor}`} />
             </div>
             {sidebarSize === "big" && (
               <p className="text-[#6c7293] group-hover:text-white transition-all duration-300">
-                {label}
+                {t(label)}
               </p>
             )}
             <MdOutlineArrowForwardIos
-              className={`ml-auto text-[#6c7293] group-hover:text-white transition-all duration-300 ${
-                openDropdown ? "rotate-90" : ""
-              }`}
+              className={`
+                ms-auto text-[#6c7293] group-hover:text-white
+                transition-all duration-300 transform
+                ${openDropdown ? "rotate-90" : "rtl:rotate-180"}
+              `}
             />
           </button>
           {openDropdown && (
-            <ul className="bg-[#191C24] rounded-r-xl">
+            <ul className="bg-[#191C24] rounded-e-xl">
               {data.map((link) => (
                 <li key={link.to}>
                   <NavLink
                     to={link.to}
-                    className="flex items-center py-[6px] w-full rounded-r-full hover:bg-[#0F1015] transition-all duration-300 px-4 pl-6"
+                    className={({ isActive }) => `
+                      flex items-center py-1.5 w-full rounded-e-full
+                      hover:bg-[#0F1015] transition-all duration-300
+                      ${isActive ? "bg-[#0F1015]" : ""}
+                      ps-6 pe-4
+                    `}
                   >
-                    <div className="p-[4px] bg-[#4b506844] rounded-full mr-3 hover:bg-[#22242E] transition-all duration-500">
-                      <link.icon className={`text-mg ${link.iconColor}`} />
+                    <div className="p-1.5 bg-[#4b506844] rounded-full me-3 hover:bg-[#22242E] transition-all duration-500">
+                      <link.icon className={`text-lg ${link.iconColor}`} />
                     </div>
                     {sidebarSize === "big" && (
                       <p className="text-[#6c7293] hover:text-white transition-all duration-300">
-                        {link.label}
+                        {t(link.label)}
                       </p>
                     )}
                   </NavLink>

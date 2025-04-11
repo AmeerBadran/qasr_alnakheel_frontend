@@ -7,6 +7,15 @@ body {
   .dashboard-container {
     display: flex;
   }
+
+    .Toastify__toast {
+      background-color: #1f1f1f !important;
+      color: #fff !important;
+    }
+  
+    .Toastify__progress-bar {
+      background: #00d084 !important;
+    }
   
   .sidebar {
     width: 200px;
