@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 export default function UpperTitle({ title, description, withDesc, imgSrc }) {
   return (
-    <div className=" relative flex justify-center items-center h-[550px] w-screen">
+    <div className=" relative flex justify-center items-center h-[550px] w-full">
       <img
         src={imgSrc}
         alt={title}

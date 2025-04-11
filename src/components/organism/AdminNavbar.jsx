@@ -1,11 +1,17 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import { TfiMenu } from "react-icons/tfi";
-import { GrLanguage } from "react-icons/gr";
 import { useDispatch, useSelector } from "react-redux";
 import { setLanguage } from "../../features/langData/langSlice";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { FaArrowRightArrowLeft } from "react-icons/fa6";
 
-export default function AdminNavbar({ sidebarSize, setSidebarSize, isHalfScreen }) {
+export default function AdminNavbar({
+  sidebarSize,
+  setSidebarSize,
+  isHalfScreen,
+}) {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.language.lang);
 
@@ -27,9 +33,13 @@ export default function AdminNavbar({ sidebarSize, setSidebarSize, isHalfScreen 
     <nav
       className={`bg-[#191c24] z-10 h-[70px] w-full flex items-center justify-between fixed shadow-lg shadow-[#22222277] px-4 pr-4 ${
         sidebarSize === "big"
-          ? "clc-width-244"
+          ? isHalfScreen
+            ? ""
+            : "clc-width-244"
           : sidebarSize === "small"
-          ? "clc-width-70"
+          ? isHalfScreen
+            ? ""
+            : "clc-width-70 "
           : ""
       } transition-all ease-in-out duration-200`}
     >
@@ -39,18 +49,36 @@ export default function AdminNavbar({ sidebarSize, setSidebarSize, isHalfScreen 
             HR
           </h1>
         )}
-        <button type="button" className="text-white text-2xl" onClick={changeSize}>
+        <button
+          type="button"
+          className="text-white text-2xl"
+          onClick={changeSize}
+        >
           <TfiMenu />
         </button>
       </div>
-      
-      <button
-        onClick={toggleLanguage}
-        className="p-2 hover:bg-gray-700 rounded flex items-center mr-12"
-      >
-        <GrLanguage className="text-3xl text-white" />
-        <span className="ml-2 text-white text-lg">{language.toUpperCase()}</span>
-      </button>
+      <div className="flex justify-center items-center gap-7">
+        <Link
+          to="/"
+          className="text-xl flex items-center gap-3 font-bold text-white hover:text-sec-color transition-colors duration-200"
+        >
+          <FaArrowRightArrowLeft/><span>Home</span>
+        </Link>
+        <button
+          onClick={toggleLanguage}
+          className="relative w-24 h-12 bg-gray-700 rounded-full p-1"
+        >
+          <motion.div
+            layout
+            transition={{ type: "spring", stiffness: 50, damping: 10 }}
+            className={`w-10 h-10 rounded-full bg-white hover:bg-sec-color font-bold transition-colors duration-200 hover:text-white text-black flex items-center justify-center shadow-md absolute top-1 ${
+              language === "ar" ? "right-1" : "left-1"
+            }`}
+          >
+            {language.toUpperCase()}
+          </motion.div>
+        </button>
+      </div>
     </nav>
   );
 }

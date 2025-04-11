@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useTranslation } from "react-i18next";
 import bg_image from "../../assets/images/companyHall.jpg";
 import {
@@ -11,9 +12,18 @@ import {
   FaShieldAlt,
   FaWater,
   FaBuilding,
+  FaGem,
+  FaExpandAlt,
+  FaLightbulb,
+  FaVolumeUp,
+  FaFemale,
+  FaSnowflake,
+  FaPaintBrush,
+  FaCar,
+  FaCameraRetro,
 } from "react-icons/fa";
 
-const featuresList = [
+const featuresListCompany = [
   { icon: FaMapMarkerAlt, key: "central_location" },
   { icon: FaTv, key: "modern_equipment" },
   { icon: FaThList, key: "flexible_seating" },
@@ -26,13 +36,29 @@ const featuresList = [
   { icon: FaBuilding, key: "tech_friendly" },
 ];
 
-export default function ConferenceFeatures() {
-  const { t } = useTranslation();
+const featuresListFamily = [
+  { icon: FaGem, key: "elegant_design" },
+  { icon: FaExpandAlt, key: "spacious_hall" },
+  { icon: FaLightbulb, key: "custom_lighting" },
+  { icon: FaVolumeUp, key: "high_quality_sound" },
+  { icon: FaFemale, key: "bridal_suite" },
+  { icon: FaSnowflake, key: "air_conditioned" },
+  { icon: FaPaintBrush, key: "decor_services" },
+  { icon: FaUtensils, key: "catering_options" },
+  { icon: FaCar, key: "valet_parking" },
+  { icon: FaCameraRetro, key: "photo_areas" },
+];
 
+export default function ConferenceFeatures({ hallType }) {
+  const { t } = useTranslation();
+  const featuresList =
+    hallType === "company" ? featuresListCompany : featuresListFamily;
+  const mainKey =
+    hallType === "company" ? "conferenceFeatures" : "weddingHallFeatures";
   return (
     <div className="pt-60 bg-my-color relative flex">
       <h1></h1>
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-24 z-20 text-white">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24 z-20 text-white">
         {featuresList.map(({ icon: Icon, key }, index) => {
           const isMiddle = index % 3 === 1;
           const isLast = index === featuresList.length - 1;
@@ -48,13 +74,13 @@ export default function ConferenceFeatures() {
               <div className="flex flex-col items-start justify-around h-full bg-[#D9D9D904] p-3 shadow-md text-center">
                 <div className="bg-primary/10 gap-2 flex w-full justify-between text-primary p-3 rounded-full text-center">
                   <Icon className="w-6 h-6" />
-                  <h3 className="text-lg font-semibold flex-1">
-                    {t(`conferenceFeatures.${key}.title`)}
+                  <h3 className="text-xl font-semibold flex-1">
+                    {t(`${mainKey}.${key}.title`)}
                   </h3>
                 </div>
                 <div className="w-full">
-                  <p className="text-base text-center">
-                    {t(`conferenceFeatures.${key}.description`)}
+                  <p className="text-lg text-center">
+                    {t(`${mainKey}.${key}.description`)}
                   </p>
                 </div>
               </div>

@@ -2,11 +2,79 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { store } from '../app/store';
+import sidebar_en from './locales/sidebar/en';
+import sidebar_ar from './locales/sidebar/ar';
+import signUp_en from './locales/signUp/en';
+import signUp_ar from './locales/signUp/ar';
 
-// ترجمات اللغات
 const resources = {
   en: {
+    sidebar: sidebar_en,
+    signUp: signUp_en,
     translation: {
+
+      "companyHallMainTexts": {
+        "upperSection": {
+          "title": "Where work and relaxation come together",
+          "description": "Hotel & Spa Resort Qasr alnkheel resort and Hotel offers well-equipped conference rooms, professional staff, and a beautiful hotel environment"
+        },
+        "descriptionSection": {
+          "title": "For companies",
+          "description": "Success of business meetings, training and conferences is a result of hard work and right decisions. One of them is a choice of a responsible hotel partner which is at the end of the day reflected in the overall rating of event, satisfaction of your clients, partners and colleagues."
+        }
+      },
+      "familyHallMainTexts": {
+        "upperSection": {
+          "title": "Organize a family celebration",
+          "description": "."
+        },
+        "descriptionSection": {
+          "title": "family celebrations",
+          "description": "We know how important is your event for you, whether it is a jubilee or an anniversary. Your story deserves the excellent service and beautiful environment of our Hotel & Spa Resort. Our professional team working with carefully selected suppliers will ensure that your day is exceptional."
+        }
+      },
+      "weddingHallFeatures": {
+        "elegant_design": {
+          "title": "Elegant Design",
+          "description": "Luxurious décor that adds a touch of sophistication to your special event."
+        },
+        "spacious_hall": {
+          "title": "Spacious Hall",
+          "description": "Large venue that comfortably accommodates a significant number of guests."
+        },
+        "custom_lighting": {
+          "title": "Custom Lighting",
+          "description": "Modern lighting systems customizable to match your event's theme and ambiance."
+        },
+        "high_quality_sound": {
+          "title": "High-Quality Sound System",
+          "description": "Excellent audio setup for weddings, speeches, and performances."
+        },
+        "bridal_suite": {
+          "title": "Private Bridal Suite",
+          "description": "Comfortable and well-equipped space for the bride to get ready before the celebration."
+        },
+        "air_conditioned": {
+          "title": "Fully Air-Conditioned",
+          "description": "Comprehensive climate control to keep guests comfortable at all times."
+        },
+        "decor_services": {
+          "title": "Decor and Styling Services",
+          "description": "Professional team to design floral arrangements and venue decoration to your taste."
+        },
+        "catering_options": {
+          "title": "Diverse Catering Options",
+          "description": "Buffet or custom menu selections to suit all preferences."
+        },
+        "valet_parking": {
+          "title": "Valet Parking Service",
+          "description": "Convenient valet service for your guests’ comfort."
+        },
+        "photo_areas": {
+          "title": "Scenic Photo Spots",
+          "description": "Dedicated areas to capture your most memorable moments."
+        }
+      },
       "conferenceFeatures": {
         "central_location": {
           "title": "Central Location",
@@ -122,7 +190,7 @@ const resources = {
         "view_details": "View details",
         "delete": "Delete"
       },
-      
+
 
       "add_room": {
         "title": "Create Room",
@@ -158,7 +226,7 @@ const resources = {
           "saturday": "Saturday",
           "sunday": "Sunday"
         },
-        
+
         "actions": {
           "upload_featured": "Click to upload featured image",
           "upload_additional": "Click to upload additional images",
@@ -237,13 +305,36 @@ const resources = {
         "friday": "Friday",
         "saturday": "Saturday"
       },
+      "dashboard": "Dashboard",
       "currency": "SAR",
       "room": "Room"
 
     }
   },
   ar: {
+    sidebar: sidebar_ar,
+    signUp: signUp_ar,
     translation: {
+      "companyHallMainTexts": {
+        "upperSection": {
+          "title": "حيث يلتقي العمل بالاسترخاء",
+          "description": "منتجع وفندق قصر النخيل يقدم قاعات مؤتمرات مجهزة تجهيزاً جيداً، وطاقماً محترفاً، وبيئة فندقية جميلة"
+        },
+        "descriptionSection": {
+          "title": "للشركات",
+          "description": "نجاح الاجتماعات التجارية، والتدريبات، والمؤتمرات هو نتيجة للعمل الجاد واتخاذ القرارات الصحيحة. أحد هذه القرارات هو اختيار شريك فندقي مسؤول، والذي ينعكس في نهاية المطاف على التقييم العام للفعالية، ورضا عملائك، وشركائك، وزملائك."
+        }
+      },
+      "familyHallMainTexts": {
+        "upperSection": {
+          "title": "نظّم احتفالاً عائلياً",
+          "description": "."
+        },
+        "descriptionSection": {
+          "title": "الاحتفالات العائلية",
+          "description": "نحن نعلم مدى أهمية مناسبتك بالنسبة لك، سواء كانت يوبيلًا أو ذكرى سنوية. قصتك تستحق خدمة ممتازة وبيئة جميلة في منتجع وفندق السبا الخاص بنا. سيضمن فريقنا المحترف، بالتعاون مع موردين مختارين بعناية، أن يكون يومك استثنائيًا."
+        }
+      },
       "welcome": "مرحبًا بك في موقعنا",
       "change_language": "تغيير اللغة",
       "headerAllService": "جميع الخدمات",
@@ -355,7 +446,7 @@ const resources = {
           "load_types": "فشل تحميل أنواع الغرف",
           "create_failed": "فشل إنشاء الغرفة"
         },
-       
+
       },
       "family": {
         "title": "القاعات العائلية",
@@ -368,6 +459,48 @@ const resources = {
         "subtitle": "للاجتماعات والمؤتمرات",
         "description": "أماكن احترافية مثالية للفعاليات الرسمية، اجتماعات العمل، والمناسبات الخاصة بالشركات.",
         "buttonText": "استكشف الآن"
+      },
+      "weddingHallFeatures": {
+        "elegant_design": {
+          "title": "تصميم راقٍ",
+          "description": "ديكور فاخر يضفي لمسة من الأناقة على مناسبتك الخاصة."
+        },
+        "spacious_hall": {
+          "title": "قاعة واسعة",
+          "description": "مساحة كبيرة تستوعب عددًا كبيرًا من الضيوف بشكل مريح."
+        },
+        "custom_lighting": {
+          "title": "إضاءة مخصصة",
+          "description": "أنظمة إضاءة حديثة قابلة للتخصيص حسب نوع الحفل وأجوائه."
+        },
+        "high_quality_sound": {
+          "title": "نظام صوتي عالي الجودة",
+          "description": "تجربة صوتية ممتازة لحفلات الزفاف والخطب والعروض."
+        },
+        "bridal_suite": {
+          "title": "جناح خاص للعروس",
+          "description": "مكان مريح ومجهز للعروس للاستعداد قبل الحفل."
+        },
+        "air_conditioned": {
+          "title": "مكيّفة بالكامل",
+          "description": "نظام تكييف متكامل يضمن راحة الضيوف في جميع الأوقات."
+        },
+        "decor_services": {
+          "title": "خدمات تنسيق وتزيين",
+          "description": "فريق متخصص لتنسيق الأزهار وتزيين القاعة حسب ذوقك."
+        },
+        "catering_options": {
+          "title": "خيارات ضيافة متنوعة",
+          "description": "بوفيه مفتوح أو قوائم مخصصة لتلائم جميع الأذواق."
+        },
+        "valet_parking": {
+          "title": "خدمة صف السيارات",
+          "description": "راحة لضيوفك مع خدمة صف السيارات الاحترافية."
+        },
+        "photo_areas": {
+          "title": "زوايا تصوير مميزة",
+          "description": "مواقع مخصصة لالتقاط أجمل الذكريات."
+        }
       },
       //updateroom
 
@@ -452,7 +585,8 @@ const resources = {
           "title": "تجهيز تقني متكامل",
           "description": "منافذ كهربائية متعددة، محطات شحن، وخيارات اتصال صوتي ومرئي."
         }
-      }
+      },
+      "dashboard": "لوحة التحكم"
     }
   }
 };

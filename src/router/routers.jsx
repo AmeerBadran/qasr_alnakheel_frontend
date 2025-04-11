@@ -7,7 +7,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
-//import ProtectedRoute from "../components/HOC/withProtect";
+import ProtectedRoute from "../components/HOC/withProtect";
 import Dashboard from "../pages/adminPages/Dashboard";
 import AdminLayout from "../components/HOC/AdminLayout";
 import AllAmenities from "../pages/adminPages/AllAmenities";
@@ -18,49 +18,50 @@ import AllRoom from "../pages/adminPages/AllRoom";
 import UpdateRoom from "../pages/adminPages/UpdateRoom";
 import MainHalls from "../pages/MainHalls";
 import Hall from "../pages/Hall";
-//import PersistLogin from "../components/HOC/PersistLogin";
-//import NotProtectdRoute from "../components/HOC/withNotProtect";
+import VerificationPage from "../pages/VerificationPage";
+import PersistLogin from "../components/HOC/PersistLogin";
+import NotProtectdRoute from "../components/HOC/withNotProtect";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    // children: [
-    //   {
-    //     element: <PersistLogin />,
     children: [
       {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "/contactUs",
-        element: <Contact />,
-      },
-      {
-        path: "/aboutUs",
-        element: <About />,
-      },
-      {
-        path: "/halls",
-        element: <MainHalls />,
-      },
-      {
-        path: "/halls/family",
-        element: <Hall hallType="family" />,
-      },
-      {
-        path: "/halls/company",
-        element: <Hall hallType="company" />,
+        element: <PersistLogin />,
+        children: [
+          {
+            index: true,
+            element: <Home />,
+          },
+          {
+            path: "/contactUs",
+            element: <Contact />,
+          },
+          {
+            path: "/aboutUs",
+            element: <About />,
+          },
+          {
+            path: "/halls",
+            element: <MainHalls />,
+          },
+          {
+            path: "/halls/family",
+            element: <Hall hallType="family" />,
+          },
+          {
+            path: "/halls/company",
+            element: <Hall hallType="company" />,
+          },
+        ],
       },
     ],
-    //},
-    //],
   },
   {
     path: "/admin",
-    //element: <ProtectedRoute element={<Admin />} />,
-    element: <AdminLayout />,
+    element: <ProtectedRoute element={<AdminLayout />} />,
+    //element: <AdminLayout />,
     children: [
       {
         index: true,
@@ -94,11 +95,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: <NotProtectdRoute element={<Login />} />,
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: <NotProtectdRoute element={<Signup />} />,
+  },
+  {
+    path: "/verificationPage/:email",
+    element: <NotProtectdRoute element={<VerificationPage />} />,
   },
   {
     path: "*",

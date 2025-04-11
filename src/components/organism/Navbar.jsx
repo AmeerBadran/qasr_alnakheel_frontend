@@ -1,16 +1,25 @@
 import mainLogo from "../../assets/images/logo.png";
 import { IoMdPersonAdd, IoMdClose } from "react-icons/io";
-import { IoLogIn } from "react-icons/io5";
+import { IoLogIn, IoLogOut } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import NavLinks from "../atoms/NavLink";
 import AuthButton from "../atoms/AuthBotton";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAuthData } from "../../features/authData/authDataSlice";
+import { logOut } from "../../api/endpoints/auth";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const id = useSelector((state) => state.authData.userId);
   const [isHalfScreen, setIsHalfScreen] = useState(window.innerWidth > 950);
   const [openNav, setOpenNav] = useState(false);
 
+  const handleLogOut = async () => {
+    await logOut();
+    dispatch(deleteAuthData());
+  };
   useEffect(() => {
     const handleResize = () => {
       setIsHalfScreen(window.innerWidth > 950);
@@ -45,20 +54,32 @@ function Navbar() {
               <NavLinks linksLayout={"fullPage"} bgColor={"dark"} />
             </ul>
             <div className="flex gap-1">
-              <AuthButton
-                label="Sign Up"
-                icon={IoMdPersonAdd}
-                roundedPosition="left"
-                bgType="dark"
-                to={"signUp"}
-              />
-              <AuthButton
-                label="Log In"
-                icon={IoLogIn}
-                roundedPosition="right"
-                bgType="dark"
-                to={"logIn"}
-              />
+              {!id ? (
+                <>
+                  <AuthButton
+                    label="Sign Up"
+                    icon={IoMdPersonAdd}
+                    roundedPosition="left"
+                    bgType="dark"
+                    to={"signUp"}
+                  />
+                  <AuthButton
+                    label="Log In"
+                    icon={IoLogIn}
+                    roundedPosition="right"
+                    bgType="dark"
+                    to={"logIn"}
+                  />
+                </>
+              ) : (
+                <AuthButton
+                  label="LogOut"
+                  icon={IoLogOut}
+                  roundedPosition="full"
+                  onClick={handleLogOut}
+                  bgType="dark"
+                />
+              )}
             </div>
           </>
         ) : (
@@ -75,10 +96,10 @@ function Navbar() {
           </button>
         )}
         <div
-          className={`absolute bg-gray-200 right-2 left-2 z-50 rounded-md p-5 transition-all duration-300 border-2 border-black ${
+          className={`absolute bg-gray-200 right-2 left-2 rounded-md p-5 transition-all duration-300 border-2 border-black ${
             openNav && !isHalfScreen
-              ? "top-24 opacity-100"
-              : "-top-96 opacity-0"
+              ? "top-24 opacity-100 z-50 "
+              : "-top-96 opacity-0 -z-50"
           }`}
         >
           <div className="flex flex-col w-full justify-between">
@@ -90,20 +111,32 @@ function Navbar() {
               />
             </ul>
             <div className="flex gap-1 mt-5 flex-col max-w-44 border-t border-my-color pt-2">
-              <AuthButton
-                label="Sign Up"
-                icon={IoMdPersonAdd}
-                roundedPosition="full"
-                bgType="light"
-                to={"signUp"}
-              />
-              <AuthButton
-                label="Log In"
-                icon={IoLogIn}
-                roundedPosition="full"
-                bgType="light"
-                to={"logIn"}
-              />
+              {!id ? (
+                <>
+                  <AuthButton
+                    label="Sign Up"
+                    icon={IoMdPersonAdd}
+                    roundedPosition="full"
+                    bgType="light"
+                    to={"signUp"}
+                  />
+                  <AuthButton
+                    label="Log In"
+                    icon={IoLogIn}
+                    roundedPosition="full"
+                    bgType="light"
+                    to={"logIn"}
+                  />
+                </>
+              ) : (
+                <AuthButton
+                  label="LogOut"
+                  icon={IoLogOut}
+                  roundedPosition="full"
+                  onClick={handleLogOut}
+                  bgType="light"
+                />
+              )}
             </div>
           </div>
         </div>

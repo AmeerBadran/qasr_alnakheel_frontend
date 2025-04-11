@@ -2,57 +2,71 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../organism/Sidebar";
 import { useEffect, useState } from "react";
 import AdminNavbar from "../organism/AdminNavbar";
+import { useTranslation } from "react-i18next";
+
 export default function AdminLayout() {
+  const { i18n } = useTranslation();
   const [sidebarSize, setSidebarSize] = useState(() => {
     return localStorage.getItem("sidebarSize") || "big";
   });
 
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 610);
-  const [isHalfScreen, setIsHalfScreen] = useState(window.innerWidth < 1024);
+  const [windowSize, setWindowSize] = useState({
+    isSmallScreen: window.innerWidth < 610,
+    isHalfScreen: window.innerWidth < 1024,
+  });
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 610);
-      setIsHalfScreen(window.innerWidth < 1024);
+      setWindowSize({
+        isSmallScreen: window.innerWidth < 610,
+        isHalfScreen: window.innerWidth < 1024,
+      });
     };
-    window.addEventListener("resize", handleResize);
 
-    handleResize();
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(document.body);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      resizeObserver.unobserve(document.body);
     };
   }, []);
 
   useEffect(() => {
     localStorage.setItem("sidebarSize", sidebarSize);
   }, [sidebarSize]);
+
+  // Calculate content margin based on sidebar size and direction
+  const getContentMargin = () => {
+    if (sidebarSize === "big") {
+      return i18n.dir() === "rtl" ? "lg:mr-[244px]" : "lg:ml-[244px]";
+    }
+    if (sidebarSize === "small") {
+      return i18n.dir() === "rtl" ? "lg:mr-[70px]" : "lg:ml-[70px]";
+    }
+    return "";
+  };
+
   return (
-    <div className="flex overflow-y-auto">
+    <div className="flex overflow-y-auto" dir={i18n.dir()}>
       <Sidebar
         sidebarSize={sidebarSize}
         setSidebarSize={setSidebarSize}
-        isHalfScreen={isHalfScreen}
+        isHalfScreen={windowSize.isHalfScreen}
       />
+
       <div
-        className={`w-[100%] ${
-          sidebarSize === "big"
-            ? "lg:ml-[244px] ml-0"
-            : sidebarSize === "small"
-            ? "lg:ml-[70px] ml-0"
-            : ""
-        } transition-all ease-in-out duration-200`}
+        className={`w-full ${getContentMargin()} transition-all ease-in-out duration-200 `}
       >
         <AdminNavbar
           sidebarSize={sidebarSize}
           setSidebarSize={setSidebarSize}
-          isSmallScreen={isSmallScreen}
-          setIsSmallScreen={setIsSmallScreen}
-          isHalfScreen={isHalfScreen}
+          isSmallScreen={windowSize.isSmallScreen}
+          isHalfScreen={windowSize.isHalfScreen}
         />
-        <div className="bg-black w-[100%] min-h-[869px] mt-[70px] py-[1.875rem] px-[1.75rem]">
+
+        <main className="bg-black w-full min-h-[calc(100vh-70px)] mt-[70px] py-[1.875rem] px-[1.75rem]">
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   );

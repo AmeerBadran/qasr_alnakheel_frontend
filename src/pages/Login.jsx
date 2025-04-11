@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-duplicate-props */
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { logIn } from "../api/endpoints/auth";
@@ -38,6 +37,7 @@ export default function Login() {
       try {
         setLoading(true);
         const response = await logIn(values);
+        console.log(response.data.user)
         setLoading(false);
         toast.success(
           `Welcome ${response.data.user.first_name} ${response.data.user.last_name}`
@@ -124,7 +124,7 @@ export default function Login() {
           </div>
           <button
             type="submit"
-            className="w-full p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 disabled:bg-gray-400"
+            className="w-full p-3 bg-blue-500 text-white rounded-lg flex justify-center items-center hover:bg-blue-600 transition duration-300 disabled:bg-gray-400"
             disabled={!formik.isValid || formik.isSubmitting}
           >
             {loading ? (
@@ -133,6 +133,7 @@ export default function Login() {
               "Login"
             )}
           </button>
+
           <div className="text-center mt-4">
             <span className="text-white">Or login with</span>
             <div className="flex justify-center gap-4 mt-2">
@@ -146,7 +147,7 @@ export default function Login() {
           </div>
           <p className="text-center text-white mt-4">
             Already have an account?{' '}
-            <Link to="/signup" className="text-red-500 hover:underline"> Sign In Now </Link>
+            <Link to="/signup" className="text-red-500 hover:underline"> Sign Un Now </Link>
 
           </p>
         </form>
