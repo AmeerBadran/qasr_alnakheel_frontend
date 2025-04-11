@@ -16,6 +16,7 @@ const UpdateRoom = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [mainImageState, setMainImageState] = useState(null);
     const [imageUrl, setImageUrl] = useState(null);
+    const [secondaryImages2, setImagesecondry] = useState([]);
     const [isSpecialPriceModalOpen, setIsSpecialPriceModalOpen] = useState(false);
 
     const formik = useFormik({
@@ -49,7 +50,12 @@ const UpdateRoom = () => {
             const pricingData = pricingRes.data;
             const mainImage = room.RoomImages.find(image => image.main === true);
             setMainImageState(mainImage.id);
-            setImageUrl(`https://qasr-alnakheel.onrender.com/uploads/roomImages/${mainImage.image_name_url}`);
+            setImageUrl(mainImage);
+            const secondaryImages = room.RoomImages
+                .filter(image => image.main === false)
+                .map(image => image);
+
+            setImagesecondry(secondaryImages);
 
             if (room) {
                 const formattedPricing = weekDays.map(day => {
@@ -110,8 +116,9 @@ const UpdateRoom = () => {
                     </button>
                 </div>
             </form>
-            <UpdateMainImage isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} imageUrl={imageUrl} roomId={mainImageState} />
+            <UpdateMainImage isOpen={isModalOpen} secondaryImages={secondaryImages2} onClose={() => setIsModalOpen(false)} imageUrl={imageUrl} roomId={id} mainImageData={mainImageState} />
             <SpecialPriceModal isOpen={isSpecialPriceModalOpen} onClose={() => setIsSpecialPriceModalOpen(false)} roomId={id} />
+
         </div>
     );
 };
@@ -138,7 +145,7 @@ const SpecialPriceModal = ({ isOpen, onClose, roomId }) => {
             toast.error(err?.response?.data?.message || "فشل في جلب الأسعار الخاصة");
         }
     };
-    
+
 
     useEffect(() => {
         if (isOpen) {
@@ -167,7 +174,7 @@ const SpecialPriceModal = ({ isOpen, onClose, roomId }) => {
             toast.error(err?.response?.data?.message || "حدث خطأ أثناء الحفظ");
         }
     };
-    
+
     const handleEdit = (price) => {
         setUpdatingId(price.id);
         setPrice(price.price);

@@ -126,7 +126,7 @@ export default function AllRoom() {
                                 <tr key={room.id} className="border-b border-gray-700 text-sm hover:bg-gray-700">
                                     <td className="p-2 flex items-center gap-2">
                                         <img
-                                            src={`https://qasr-alnakheel.onrender.com/uploads/roomImages/${room.RoomImages?.[0]?.image_name_url}`}
+                                            src={room.RoomImages?.[0]?.image_name_url}
                                             alt="Room"
                                             className="w-10 h-10 object-cover rounded"
                                         />
