@@ -56,9 +56,9 @@ export default function ConferenceFeatures({ hallType }) {
   const mainKey =
     hallType === "company" ? "conferenceFeatures" : "weddingHallFeatures";
   return (
-    <div className="pt-60 bg-my-color relative flex">
+    <div className="pt-52 pb-20 bg-my-color relative flex">
       <h1></h1>
-      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-24 z-20 text-white">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 z-20 text-white">
         {featuresList.map(({ icon: Icon, key }, index) => {
           const isMiddle = index % 3 === 1;
           const isLast = index === featuresList.length - 1;
@@ -68,8 +68,8 @@ export default function ConferenceFeatures({ hallType }) {
             <div
               key={key}
               className={`p-4 bg-[#212124] max-w-72 h-64 transition-all duration-300 
-        ${isMiddle ? "lg:-mt-20" : ""} 
-        ${shouldCenterLast ? "lg:col-start-2 lg:-mt-20" : ""}`}
+        ${isMiddle ? "lg:-mt-36" : ""} 
+        ${shouldCenterLast ? "lg:col-start-2 lg:-mt-36" : ""}`}
             >
               <div className="flex flex-col items-start justify-around h-full bg-[#D9D9D904] p-3 shadow-md text-center">
                 <div className="bg-primary/10 gap-2 flex w-full justify-between text-primary p-3 rounded-full text-center">

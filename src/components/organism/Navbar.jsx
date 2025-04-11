@@ -9,12 +9,24 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAuthData } from "../../features/authData/authDataSlice";
 import { logOut } from "../../api/endpoints/auth";
+import { motion } from "framer-motion";
+import { setLanguage } from "../../features/langData/langSlice";
 
 function Navbar() {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.authData.userId);
+  const language = useSelector((state) => state.language.lang);
+
+  const profileImage = useSelector(
+    (state) => state.authData?.allUserData?.profile_picture
+  );
   const [isHalfScreen, setIsHalfScreen] = useState(window.innerWidth > 950);
   const [openNav, setOpenNav] = useState(false);
+
+  const toggleLanguage = () => {
+    const newLang = language === "en" ? "ar" : "en";
+    dispatch(setLanguage(newLang));
+  };
 
   const handleLogOut = async () => {
     await logOut();
@@ -54,6 +66,20 @@ function Navbar() {
               <NavLinks linksLayout={"fullPage"} bgColor={"dark"} />
             </ul>
             <div className="flex gap-1">
+              <button
+                onClick={toggleLanguage}
+                className="relative w-20 h-10 bg-gray-700  my-auto rounded-full p-1"
+              >
+                <motion.div
+                  layout
+                  transition={{ type: "spring", stiffness: 50, damping: 10 }}
+                  className={`w-8 h-8 rounded-full bg-white hover:bg-sec-color font-bold transition-colors duration-200 hover:text-white text-black flex items-center justify-center shadow-md absolute top-1 ${
+                    language === "ar" ? "right-1" : "left-1"
+                  }`}
+                >
+                  {language.toUpperCase()}
+                </motion.div>
+              </button>
               {!id ? (
                 <>
                   <AuthButton
@@ -72,13 +98,20 @@ function Navbar() {
                   />
                 </>
               ) : (
-                <AuthButton
-                  label="LogOut"
-                  icon={IoLogOut}
-                  roundedPosition="full"
-                  onClick={handleLogOut}
-                  bgType="dark"
-                />
+                <>
+                  <AuthButton
+                    label="LogOut"
+                    icon={IoLogOut}
+                    roundedPosition="full"
+                    onClick={handleLogOut}
+                    bgType="dark"
+                  />
+                  <img
+                    src={profileImage}
+                    alt="user"
+                    className="w-10 h-10 rounded-full my-auto"
+                  />
+                </>
               )}
             </div>
           </>
@@ -111,6 +144,20 @@ function Navbar() {
               />
             </ul>
             <div className="flex gap-1 mt-5 flex-col max-w-44 border-t border-my-color pt-2">
+              <button
+                onClick={toggleLanguage}
+                className="relative w-20 h-10 bg-gray-700  my-auto rounded-full p-1"
+              >
+                <motion.div
+                  layout
+                  transition={{ type: "spring", stiffness: 50, damping: 10 }}
+                  className={`w-8 h-8 rounded-full bg-white hover:bg-sec-color font-bold transition-colors duration-200 hover:text-white text-black flex items-center justify-center shadow-md absolute top-1 ${
+                    language === "ar" ? "right-1" : "left-1"
+                  }`}
+                >
+                  {language.toUpperCase()}
+                </motion.div>
+              </button>
               {!id ? (
                 <>
                   <AuthButton
@@ -129,13 +176,20 @@ function Navbar() {
                   />
                 </>
               ) : (
-                <AuthButton
-                  label="LogOut"
-                  icon={IoLogOut}
-                  roundedPosition="full"
-                  onClick={handleLogOut}
-                  bgType="light"
-                />
+                <>
+                  <AuthButton
+                    label="LogOut"
+                    icon={IoLogOut}
+                    roundedPosition="full"
+                    onClick={handleLogOut}
+                    bgType="light"
+                  />
+                  <img
+                    src={profileImage}
+                    alt="user"
+                    className="w-10 h-10 rounded-full my-auto"
+                  />
+                </>
               )}
             </div>
           </div>

@@ -24,9 +24,12 @@ export default function PersistLogin() {
     async function refreshUserData() {
       try {
         const response = await getUserData();
+        console.log(response.data.user);
         dispatch(
           saveAuthData({
+            userId: response.data.user.id,
             userData: response.data.user,
+            userRole: response.data.user.role,
           })
         );
         // eslint-disable-next-line no-unused-vars

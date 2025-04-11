@@ -1,3 +1,4 @@
+
 import TypeAnimationComp from "../components/molecule/TypeAnimationComp";
 
 export default function Home() {

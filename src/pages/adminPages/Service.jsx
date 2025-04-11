@@ -76,7 +76,7 @@ export default function Service() {
               services.map((s, index) => (
                 <tr key={index} className="border-b border-gray-600 hover:bg-gray-700">
                   <td className='p-3'>
-                    <img src={`https://qasr-alnakheel.onrender.com/uploads/serviceImage/${s.image}`} className='size-8'/>
+                    <img src={s.image} className='size-8'/>
                   </td>
                   <td className="p-3">{lang === "ar" ? s.name.ar : s.name.en}</td>
                   <td className="p-3">{lang === "ar" ? s.description.ar : s.description.en}</td>
