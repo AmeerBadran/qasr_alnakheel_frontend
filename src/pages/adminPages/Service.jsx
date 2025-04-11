@@ -25,19 +25,19 @@ export default function Service() {
 
   const fetchServiceData = async () => {
 
-      const response = await serviceData();
-      if(response.data.rows){
-        setServices(response.data.rows);
-      }else{
-        setServices([]);
-      }
+    const response = await serviceData();
+    if (response.data.rows) {
+      setServices(response.data.rows);
+    } else {
+      setServices([]);
+    }
 
   };
 
   const handleDeleteService = async (id) => {
-      const response=await deleteService(id);
-      setServices((prevServices) => prevServices.filter(service => service.id !== id));
-      toast.success(response.data.message);
+    const response = await deleteService(id);
+    setServices((prevServices) => prevServices.filter(service => service.id !== id));
+    toast.success(response.data.message);
   };
 
   const handleServiceAddedOrUpdated = (newService) => {
@@ -58,7 +58,7 @@ export default function Service() {
       <div className="bg-gray-800 p-4 rounded-lg">
         <div className="flex justify-between items-center mb-4">
           <button onClick={() => openModal(null)} className="bg-green-500 text-white px-4 py-2 rounded">
-           {t("headerServices")}
+            {t("headerServices")}
           </button>
         </div>
         <table className="w-full text-left text-sm text-gray-400">
@@ -76,7 +76,7 @@ export default function Service() {
               services.map((s, index) => (
                 <tr key={index} className="border-b border-gray-600 hover:bg-gray-700">
                   <td className='p-3'>
-                    <img src={`https://qasr-alnakheel.onrender.com/uploads/serviceImage/${s.image}`} className='size-8'/>
+                    <img src={s.image} className='size-8' />
                   </td>
                   <td className="p-3">{lang === "ar" ? s.name.ar : s.name.en}</td>
                   <td className="p-3">{lang === "ar" ? s.description.ar : s.description.en}</td>
