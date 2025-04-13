@@ -21,6 +21,7 @@ import Hall from "../pages/Hall";
 import VerificationPage from "../pages/VerificationPage";
 import PersistLogin from "../components/HOC/PersistLogin";
 import NotProtectdRoute from "../components/HOC/withNotProtect";
+import HotelBookingPage from "../pages/Rooms";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
             path: "/halls/company",
             element: <Hall hallType="company" />,
           },
+          {
+            path:"rooms",
+            element: <HotelBookingPage />,
+          }
         ],
       },
     ],

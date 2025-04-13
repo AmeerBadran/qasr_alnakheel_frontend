@@ -2,7 +2,6 @@ import axiosInstance from "../axios";
 
 // room type endpoints
 export const roomTypeData = () => {
-  console.log("object")
   return axiosInstance.get('/room/roomTypes');
 }
 
@@ -94,3 +93,44 @@ export const updateRoomPricing = (roomId, roomPricingData) => {
 export const getRoomPrice=(roomId)=>{
   return axiosInstance.get(`/room/get/roomPrices/${roomId}`)
 }
+
+//UpdateMainImage
+export const updateMainImage = async (roomId, image) => {
+  console.log(roomId)
+    return axiosInstance.patch(`/room/changeMainImage/${roomId}`, image, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  };
+  //delete single room image
+  export const deleteSingleRoomImage = async (roomId, image) => {
+    return axiosInstance.delete(`/room/roomImage/${roomId}`, {
+      data: { image }
+    });
+  };
+  //add room image
+  export const addRoomImage = async (roomId, image) => {
+    return axiosInstance.post(`/room/addRoomImage/${roomId}`, image, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        },
+        });
+    };
+ // get roomtype image
+  export const getRoomTypeImage = async (roomId) => {
+    return axiosInstance.get(`/room/get/RoomTypeImage/${roomId}`);
+    };
+ //special price
+ export const addSpecialPrice = async ( specialPriceData) => {
+  return axiosInstance.post(`/room/addSpecialPrice`, specialPriceData);
+  };
+//get all special price
+export const getAllSpecialPrice = async () => {
+  return axiosInstance.get(`/room/get/allSpecialPrice`);
+  };
+
+//update special price
+export const updateSpecialPrice = async (specialPriceId, specialPriceData) => {
+  return axiosInstance.patch(`/room/updateSpecialPrice/${specialPriceId}`, specialPriceData);
+  };

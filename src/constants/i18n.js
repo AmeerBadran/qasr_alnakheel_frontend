@@ -6,9 +6,12 @@ import sidebar_en from './locales/sidebar/en';
 import sidebar_ar from './locales/sidebar/ar';
 import signUp_en from './locales/signUp/en';
 import signUp_ar from './locales/signUp/ar';
+import home_en from './locales/home/en';
+import home_ar from './locales/home/ar';
 
 const resources = {
   en: {
+    home: home_en,
     sidebar: sidebar_en,
     signUp: signUp_en,
     translation: {
@@ -312,6 +315,7 @@ const resources = {
     }
   },
   ar: {
+    home: home_ar,
     sidebar: sidebar_ar,
     signUp: signUp_ar,
     translation: {

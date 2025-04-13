@@ -24,7 +24,6 @@ export default function PersistLogin() {
     async function refreshUserData() {
       try {
         const response = await getUserData();
-        console.log(response.data.user);
         dispatch(
           saveAuthData({
             userId: response.data.user.id,
@@ -43,7 +42,7 @@ export default function PersistLogin() {
   }, [dispatch, navigate]);
 
   return loading ? (
-    <div className="w-screen h-screen flex justify-center items-center bg-gray-900 bg-opacity-50">
+    <div className="w-full h-screen flex justify-center items-center bg-gray-900 bg-opacity-50">
       <ReactLoading type="spin" color="black" height={200} width={110} />
     </div>
   ) : (

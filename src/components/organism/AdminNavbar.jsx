@@ -71,7 +71,7 @@ export default function AdminNavbar({
           <motion.div
             layout
             transition={{ type: "spring", stiffness: 50, damping: 10 }}
-            className={`w-10 h-10 rounded-full bg-white hover:bg-sec-color font-bold transition-colors duration-200 hover:text-white text-black flex items-center justify-center shadow-md absolute top-1 ${
+            className={`w-10 h-10 rounded-full bg-white hover:bg-sec-color-100 font-bold transition-colors duration-200 hover:text-white text-black flex items-center justify-center shadow-md absolute top-1 ${
               language === "ar" ? "right-1" : "left-1"
             }`}
           >

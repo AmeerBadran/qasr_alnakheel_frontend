@@ -20,7 +20,7 @@ export default function Hall({ hallType }) {
       <UpperTitle
         title={t(titleKey)}
         description={t(descKey)}
-        withDesc={hallType === "company" ? true : false}
+        withDesc={false}
         imgSrc={hallType === "company" ? comImage : familyImage}
       />
       <PageDescription
