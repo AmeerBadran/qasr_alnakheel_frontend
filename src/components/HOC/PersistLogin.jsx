@@ -33,7 +33,7 @@ export default function PersistLogin() {
         );
         // eslint-disable-next-line no-unused-vars
       } catch (error) {
-        navigate("/login");
+        navigate("/");
       } finally {
         setLoading(false);
       }
