@@ -83,8 +83,8 @@ export default {
     booking: {
         form: {
             selectRoomType: "Select Room Type",
-            checkIn: "Check-in Date",
-            checkOut: "Check-out Date",
+            checkIn: "Check-in",
+            checkOut: "Check-out",
             adults: "Adults",
             children: "Children",
             submit: "Book Now",
@@ -99,6 +99,9 @@ export default {
                 failed: "Booking failed",
                 min:"Value must be at least 0",
             }
+        },
+        quickForm: {
+            title: "Quick Booking",
         }
     }
 

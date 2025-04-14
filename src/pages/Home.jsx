@@ -8,7 +8,6 @@ import FacilitiesSection from "../components/organism/FacilitiesSection";
 import VideoSection from "../components/organism/VideoSection";
 export default function Home() {
   const { t } = useTranslation("home");
-
   return (
     <div className=" text-white  bg-back-color">
       <MyCarousel />

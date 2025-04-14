@@ -5,3 +5,15 @@ export const createBookingByRoomType = (formData) => {
     const id = state.authData?.userId;
     return axiosInstance.post(`/booking/${id}`, formData);
 }
+
+export const getRoomTypeForNavbar = () => {
+    return axiosInstance.get('/room/get/RoomTypeForNavbar');
+}
+
+export const getRoomTypeAndRoomsByTypeId = (typeId, checkIn, checkOut) => {
+    return axiosInstance.get(`/room/get/RoomTypeWithRooms/${typeId}?check_in=${checkIn}&check_out=${checkOut}`);
+}
+
+export const getRoomTypeAndRoomsByTypeIdnoDates = (typeId) => {
+    return axiosInstance.get(`/room/get/RoomTypeRoomsNoDates/${typeId}`);
+}

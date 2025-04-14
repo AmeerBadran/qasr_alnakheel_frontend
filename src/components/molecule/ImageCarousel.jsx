@@ -52,7 +52,7 @@ const ImageCarousel = ({ images }) => {
           return (
             <div key={src.id}>
               <div className="relative w-full h-[350px] rounded overflow-hidden group border shadow-lg shadow-gray-700 my-4">
-                <div className=" absolute bottom-0 w-full h-0 group-hover:h-96 transition-all duration-300 ease-out bg-my-color/90 z-10 border-t-1 overflow-hidden">
+                <div className=" absolute bottom-0 w-full h-0 group-hover:h-96 transition-all duration-300 ease-out bg-my-color/60 z-10 border-t-1 overflow-hidden">
                   <div className="flex flex-col justify-center items-center h-full text-white p-4">
                     <h2 className="text-3xl font-bold">
                       {src.name[i18n.language || src.name.en]}
@@ -79,7 +79,7 @@ const ImageCarousel = ({ images }) => {
                 <img
                   src={src.room.RoomImages[0].image_name_url}
                   alt={`Slide ${index + 1}`}
-                  className="rounded shadow-lg w-full h-[350px] object-cover"
+                  className="rounded shadow-lg w-full h-[350px] object-cover group-hover:scale-110 transition-transform duration-[2000ms] ease-out"
                 />
               </div>
             </div>

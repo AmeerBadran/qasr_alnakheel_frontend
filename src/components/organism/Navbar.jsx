@@ -62,7 +62,7 @@ function Navbar() {
         </Link>
         {isHalfScreen ? (
           <>
-            <ul className="flex gap-6 slg:gap-8 xl:gap-14 justify-center items-center p-4 ">
+            <ul className="flex gap-3 slg:gap-5 xl:gap-10 justify-center items-center p-4 ">
               <NavLinks linksLayout={"fullPage"} bgColor={"dark"} />
             </ul>
             <div className="flex gap-1">

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
+import LinkButton from "../atoms/LinkButton";
 //import BouncingImage from "../atoms/BouncingImage";
 
 export default function DescriptionWithImage({
@@ -23,12 +23,8 @@ export default function DescriptionWithImage({
           <h2 className="text-4xl font-bold text-white mb-4">{title}</h2>
           <div className="mt-2 mb-5 h-2 rounded-full w-1/5 bg-gradient-to-r from-white from-0%  to-sec-color-100 to-60%"></div>
           <p className="text-gray-200 text-xl mb-12 mt-10">{description}</p>
-          <Link
-            to={buttonLink}
-            className="px-4 py-2 bg-sec-color-100 text-white rounded-sm hover:bg-sec-color-200 transition duration-200"
-          >
-            {buttonText}
-          </Link>
+          
+          <LinkButton link={buttonLink} text={buttonText} />
         </div>
       </div>
     </div>

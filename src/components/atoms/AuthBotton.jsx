@@ -22,7 +22,7 @@ const AuthButton = ({ label, icon: Icon, roundedPosition, to, onClick }) => {
   `;
 
   const backgroundClasses = `
-    absolute bg-sec-color w-0 h-full top-0
+    absolute bg-sec-color-100 w-0 h-full top-0
     ${roundedPosition === "left" ? "end-0" : "start-0"} 
     group-hover:w-full opacity-0 group-hover:opacity-100 
     transition-all duration-500

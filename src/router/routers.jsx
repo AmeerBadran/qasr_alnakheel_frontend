@@ -21,15 +21,15 @@ import Hall from "../pages/Hall";
 import VerificationPage from "../pages/VerificationPage";
 import PersistLogin from "../components/HOC/PersistLogin";
 import NotProtectdRoute from "../components/HOC/withNotProtect";
-import HotelBookingPage from "../pages/Rooms";
+import HotelBookingPage from "../pages/HotelBookingPage";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <RootLayout />,
+    element: <PersistLogin />,
     children: [
       {
-        element: <PersistLogin />,
+        path: "/",
+        element: <RootLayout />,
         children: [
           {
             index: true,
@@ -56,63 +56,73 @@ const router = createBrowserRouter([
             element: <Hall hallType="company" />,
           },
           {
-            path:"rooms",
+            path: "/rooms/:id",
             element: <HotelBookingPage />,
-          }
+          },
         ],
       },
     ],
   },
   {
-    path: "/admin",
-    //element: <ProtectedRoute element={<AdminLayout />} />,
-    element: <AdminLayout />,
+    element: <PersistLogin />,
     children: [
       {
-        index: true,
-        element: <Dashboard />,
-      },
-      {
-        path: "roomtype",
-        element: <RoomType />,
-      },
-      {
-        path: "allamenities",
-        element: <AllAmenities />,
-      },
-      {
-        path: "allservice",
-        element: <Service />,
-      },
-      {
-        path: "addroom",
-        element: <AddRoom />,
-      },
-      {
-        path: "allroom",
-        element: <AllRoom />,
-      },
-      {
-        path: "updateroom/:id",
-        element: <UpdateRoom />,
+        path: "/admin",
+        //element: <ProtectedRoute element={<AdminLayout />} />,
+        element: <AdminLayout />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />,
+          },
+          {
+            path: "roomtype",
+            element: <RoomType />,
+          },
+          {
+            path: "allamenities",
+            element: <AllAmenities />,
+          },
+          {
+            path: "allservice",
+            element: <Service />,
+          },
+          {
+            path: "addroom",
+            element: <AddRoom />,
+          },
+          {
+            path: "allroom",
+            element: <AllRoom />,
+          },
+          {
+            path: "updateroom/:id",
+            element: <UpdateRoom />,
+          },
+        ],
       },
     ],
   },
   {
-    path: "/login",
-    element: <NotProtectdRoute element={<Login />} />,
-  },
-  {
-    path: "/signup",
-    element: <NotProtectdRoute element={<Signup />} />,
-  },
-  {
-    path: "/verificationPage/:email",
-    element: <NotProtectdRoute element={<VerificationPage />} />,
-  },
-  {
-    path: "*",
-    element: () => <h1>Page Not Found</h1>,
+    element: <PersistLogin />,
+    children: [
+      {
+        path: "/login",
+        element: <NotProtectdRoute element={<Login />} />,
+      },
+      {
+        path: "/signup",
+        element: <NotProtectdRoute element={<Signup />} />,
+      },
+      {
+        path: "/verificationPage/:email",
+        element: <NotProtectdRoute element={<VerificationPage />} />,
+      },
+      {
+        path: "*",
+        element: () => <h1>Page Not Found</h1>,
+      },
+    ],
   },
 ]);
 

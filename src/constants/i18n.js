@@ -8,10 +8,13 @@ import signUp_en from './locales/signUp/en';
 import signUp_ar from './locales/signUp/ar';
 import home_en from './locales/home/en';
 import home_ar from './locales/home/ar';
+import roomAndBooking_en from './locales/roomAndBooking/en';
+import roomAndBooking_ar from './locales/roomAndBooking/ar';
 
 const resources = {
   en: {
     home: home_en,
+    roomAndBooking: roomAndBooking_en,
     sidebar: sidebar_en,
     signUp: signUp_en,
     translation: {
@@ -316,6 +319,7 @@ const resources = {
   },
   ar: {
     home: home_ar,
+    roomAndBooking: roomAndBooking_ar,
     sidebar: sidebar_ar,
     signUp: signUp_ar,
     translation: {

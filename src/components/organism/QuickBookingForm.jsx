@@ -10,9 +10,9 @@ import { roomTypeData } from "../../api/endpoints/room";
 import { createBookingByRoomType } from "../../api/endpoints/booking";
 import { toast } from "react-toastify";
 
-function QuickBookingForm({ locale }) {
+function QuickBookingForm() {
   const [roomTypes, setRoomTypes] = useState([]);
-  const { t } = useTranslation("home");
+  const { t, i18n } = useTranslation("home");
 
   useEffect(() => {
     const fetchRoomTypes = async () => {
@@ -92,7 +92,7 @@ function QuickBookingForm({ locale }) {
         <option value="">{t("booking.form.selectRoomType")}</option>
         {roomTypes.map((room) => (
           <option key={room.id} value={room.id}>
-            {room.name[locale]}
+            {room.name[i18n.language||room.name.en]}
           </option>
         ))}
       </select>

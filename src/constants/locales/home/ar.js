@@ -100,6 +100,9 @@ export default {
                 failed: "فشل في الحجز",
                 min: "القيمة يجب أن تكون على الأقل 0",
             }
+        },
+        quickForm:{
+            title:"احجز بسرعة",
         }
     }
 

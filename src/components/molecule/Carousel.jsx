@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { LuExternalLink } from "react-icons/lu";
 import QuickBookingForm from "../organism/QuickBookingForm";
+import LinkButton from "../atoms/LinkButton";
 
 const Carousel = ({ slides }) => {
   const locale = "ar";
@@ -58,13 +57,11 @@ const Carousel = ({ slides }) => {
                 transition={{ delay: 0.6, duration: 0.6 }}
                 className="mt-10"
               >
-                <Link
-                  to={slides[currentIndex].link}
-                  className="px-8 py-3 flex justify-center items-center gap-2 bg-sec-color-100 hover:bg-sec-color-200 hover:text-black text-xl text-gray-100 font-semibold rounded transition"
-                >
-                  {slides[currentIndex].buttonText}
-                  <LuExternalLink />
-                </Link>
+                <LinkButton
+                  link={slides[currentIndex].link}
+                  text={slides[currentIndex].buttonText}
+                  size="large"
+                />
               </motion.div>
               {slides[currentIndex].showForm === "roomBooking" && (
                 <motion.div
