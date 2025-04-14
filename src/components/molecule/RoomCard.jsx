@@ -4,6 +4,7 @@ import { LiaBathSolid } from "react-icons/lia";
 import { IoPeopleOutline } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { MdOutlineBedroomChild } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 export default function RoomCard({ room, roomType }) {
   const { t, i18n } = useTranslation("roomAndBooking");
@@ -37,15 +38,20 @@ export default function RoomCard({ room, roomType }) {
               {t("roomAndBooking.ft")}
             </span>
             <span className="flex items-center gap-1">
-              <IoPeopleOutline className="w-5 h-5" /> {room.capacity} {t("roomAndBooking.guests")}
+              <IoPeopleOutline className="w-5 h-5" /> {room.capacity}{" "}
+              {t("roomAndBooking.guests")}
             </span>
             <span className="flex items-center gap-1">
-              <LiaBathSolid className="w-5 h-5" /> {room.num_of_baths} {t("roomAndBooking.bath")}
+              <LiaBathSolid className="w-5 h-5" /> {room.num_of_baths}{" "}
+              {t("roomAndBooking.bath")}
             </span>
           </div>
-          <button className="text-sm font-semibold flex gap-1 items-center text-gray-700 border-b-2 border-transparent hover:border-gray-800 transition">
+          <Link
+            to={`/rooms/roomdetails/${room.id}`}
+            className="text-sm font-semibold flex gap-1 items-center text-gray-700 border-b-2 border-transparent hover:border-gray-800 transition"
+          >
             {t("roomAndBooking.readMore")} <FaBookReader />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

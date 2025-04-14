@@ -22,6 +22,7 @@ import VerificationPage from "../pages/VerificationPage";
 import PersistLogin from "../components/HOC/PersistLogin";
 import NotProtectdRoute from "../components/HOC/withNotProtect";
 import HotelBookingPage from "../pages/HotelBookingPage";
+import SingleRoom from "../pages/SingleRoom";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
           {
             path: "/rooms/:id",
             element: <HotelBookingPage />,
+          },
+          {
+            path: "/rooms/roomdetails/:id",
+            element: <SingleRoom />,
           },
         ],
       },
