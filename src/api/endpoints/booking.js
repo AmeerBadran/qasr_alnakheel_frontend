@@ -17,3 +17,9 @@ export const getRoomTypeAndRoomsByTypeId = (typeId, checkIn, checkOut) => {
 export const getRoomTypeAndRoomsByTypeIdnoDates = (typeId) => {
     return axiosInstance.get(`/room/get/RoomTypeRoomsNoDates/${typeId}`);
 }
+
+export const CreateBookingByRoomId = (bookingData) => {
+    const state = store.getState();
+    const userId = state.authData?.userId;
+    return axiosInstance.post(`/booking/roomBooking/${userId}`, bookingData);
+}

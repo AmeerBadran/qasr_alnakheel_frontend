@@ -1,126 +1,157 @@
 import { useTranslation } from "react-i18next";
+import ReservationForm from "./ReservationForm";
 
 /* eslint-disable react/prop-types */
 export default function RoomReservationPage({ roomData }) {
   const { t, i18n } = useTranslation("roomAndBooking");
-  console.log(roomData);
+
   if (!roomData) {
     return <div className="text-center text-gray-600 py-10">Loading...</div>;
   }
+
+  const lang = i18n.language || "en";
+
   return (
-    <div className="max-w-[1400px] mx-auto  mt-10 p-8">
-      <div className="flex flex-col lg:flex-row  gap-10 text-[#888] ">
+    <div className="max-w-[1400px] mx-auto mt-10 p-8 text-[#333]">
+      <div className="flex flex-col lg:flex-row gap-10">
         {/* Left Section */}
         <div className="flex-1 space-y-6">
+          <h1 className="text-3xl font-semibold">
+            {roomData.RoomType.name[lang]} - {roomData.room_no}
+          </h1>
           <p>{t("roomAndBooking.singleRoom.description")}</p>
-          <p>{roomData.RoomType.description.en}</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <ul className="space-y-2 list-disc list-inside">
-              <li>Eu libero varius maximus in lectus vulputate</li>
-              <li>Faucibus quis vehicula condimentum fusce</li>
-              <li>Dolor hac cras pellentesque nec molestie</li>
-              <li>Egestas sem cras nullam curabitur blandit</li>
-            </ul>
-            <ul className="space-y-2 list-disc list-inside">
-              <li>Capacity : 4 Persons</li>
-              <li>Size : 200sq.ft</li>
-              <li>Bed : King Size</li>
-              <li>View : City View</li>
-            </ul>
-          </div>
 
-          <h2 className="text-2xl font-semibold text-black border-b pb-2">
-            Room Amenities
+          <p className="text-gray-700">{roomData.RoomType.description[lang]}</p>
+
+          <ul className="space-y-2 list-disc list-inside grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <li>
+              {t("roomAndBooking.singleRoom.capacity")}: {roomData.capacity}
+            </li>
+            <li>
+              {t("roomAndBooking.adults")}: {roomData.adult_guests}
+            </li>
+            <li>
+              {t("roomAndBooking.children")}: {roomData.child_guests}
+            </li>
+            <li>
+              {t("roomAndBooking.bath")}: {roomData.num_of_baths}
+            </li>
+            <li>
+              {t("roomAndBooking.size")}: {roomData.room_length} m²
+            </li>
+            <li>
+              {t("roomAndBooking.beds")}: {roomData.bed_type[lang]}
+            </li>
+            <li>
+              {t("roomAndBooking.category")}: {roomData.category[lang]}
+            </li>
+          </ul>
+
+          <h2 className="text-2xl font-semibold border-b pb-2">
+            {t("roomAndBooking.amenities")}
           </h2>
           <div className="grid 2xmobile:grid-cols-2 sm:grid-cols-3 gap-4 text-gray-700">
             {roomData.Services.map((service) => (
-              <div key={service.id} className="flex items-center space-x-2">
+              <div
+                key={service.id}
+                className="flex gap-3 items-center space-x-2"
+              >
                 <img
                   src={service.image}
-                  alt={service.name.en}
+                  alt={service.name[lang]}
                   className="w-6 h-6"
                 />
-                <span>{service.name.en}</span>
+                <span>{service.name[lang]}</span>
               </div>
             ))}
           </div>
-        </div>
 
-        {/* Right Section */}
-        <div className="w-full lg:w-[400px] bg-my-color text-white p-6 space-y-4 ">
-          <h2 className="text-2xl font-semibold text-white">
-            Your Reservation
+          {/* Pricing */}
+          <h2 className="text-2xl font-semibold mt-6 border-b pb-2">
+            {t("roomAndBooking.pricing")}
           </h2>
-
-          <div>
-            <label className="block mb-1">Check-in</label>
-            <input
-              type="date"
-              defaultValue="2025-04-14"
-              className="w-full p-2 border rounded text-gray-900"
-            />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
+            {roomData.RoomPricings.map((price) => (
+              <div
+                key={price.id}
+                className="bg-white shadow rounded p-4 border"
+              >
+                <h3 className="font-semibold capitalize">
+                  {t(`roomAndBooking.${price.day_of_week}`)}
+                </h3>
+                <p className="text-lg text-[#bfa276] font-bold">
+                  NIS {price.price}
+                </p>
+              </div>
+            ))}
           </div>
 
-          <div>
-            <label className="block mb-1">Check-out</label>
-            <input
-              type="date"
-              defaultValue="2025-04-15"
-              className="w-full p-2 border rounded text-gray-900"
-            />
-          </div>
-
-          <div>
-            <label className="block mb-1">Rooms</label>
-            <select className="w-full p-2 border rounded text-gray-900">
-              <option>1 Room</option>
-              <option>2 Rooms</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="block mb-1">Guests</label>
-            <select className="w-full p-2 border rounded text-gray-900">
-              <option>1 Adult</option>
-              <option>2 Adults</option>
-            </select>
-          </div>
-
-          <div className="pt-2 text-sm">
-            <strong>Your Price</strong>
-            <div>NIS 65.00 / per room</div>
-          </div>
-
-          <button className="w-full bg-[#bfa276] text-white py-2 rounded mt-2 hover:bg-[#a89064] transition">
-            Book Your Stay
-          </button>
+          {/* Special Offers */}
+          {roomData.SpecialPricings.length > 0 && (
+            <>
+              <h2 className="text-2xl font-semibold mt-6 border-b pb-2">
+                {t("roomAndBooking.specialOffers")}
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-4 mt-2">
+                {roomData.SpecialPricings.map((offer) => (
+                  <div
+                    key={offer.id}
+                    className="bg-white border-l-4 border-[#bfa276] p-4 rounded shadow-sm"
+                  >
+                    <h3 className="font-semibold text-[#bfa276]">
+                      {offer.name[lang]}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-2">
+                      {offer.description[lang]}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {new Date(offer.start_date).toLocaleDateString()} -{" "}
+                      {new Date(offer.end_date).toLocaleDateString()}
+                    </p>
+                    <p className="font-bold mt-1">NIS {offer.price}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
+
+        {/* Right Section - Reservation Form */}
+        <ReservationForm
+          roomId={roomData.id}
+          roomPricings={roomData.RoomPricings}
+          specialPricings={roomData.SpecialPricings}
+        />
       </div>
+
+      {/* Room Gallery */}
       {roomData.RoomImages && roomData.RoomImages.length > 0 && (
         <div className="w-full mt-10">
-          <h2 className="text-2xl font-semibold text-black mb-4">
-            Room Gallery
+          <h2 className="text-2xl font-semibold mb-4">
+            {t("roomAndBooking.gallery")}
           </h2>
           <div className="flex flex-col lg:flex-row gap-4">
-            {/* الصورة الرئيسية */}
             <div className="flex-1">
               <img
-                src={roomData.RoomImages[0].image_name_url}
+                src={
+                  roomData.RoomImages.find((img) => img.main)?.image_name_url
+                }
                 alt="Main Room"
-                className="w-full h-[400px] object-cover rounded-lg"
+                className="w-full max-h-[400px] lg:max-h-[600px] object-cover rounded-lg"
               />
             </div>
 
-            {/* صور إضافية */}
-            <div className="lg:w-[300px] flex lg:flex-col gap-4 overflow-x-auto lg:overflow-y-auto">
-              {roomData.RoomImages.slice(1).map((image, index) => (
-                <img
-                  key={index}
-                  src={image.image_name_url}
-                  alt={`Room ${index + 2}`}
-                  className="w-40 h-32 object-cover rounded-lg flex-shrink-0"
-                />
-              ))}
+            <div className="lg:w-[400px] grid grid-cols-2 gap-4 overflow-x-auto lg:overflow-y-auto">
+              {roomData.RoomImages.filter((img) => !img.main).map(
+                (image, index) => (
+                  <img
+                    key={index}
+                    src={image.image_name_url}
+                    alt={`Room ${index + 2}`}
+                    className="w-48 h-48 object-cover rounded-lg flex-shrink-0"
+                  />
+                )
+              )}
             </div>
           </div>
         </div>

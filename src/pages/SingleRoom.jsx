@@ -21,13 +21,13 @@ export default function SingleRoom() {
   }, [roomId]);
 
   return (
-    <div className="bg-[#f6f0e8] text-white min-h-screen">
+    <div className="bg-[#f6f0e8]  text-white min-h-screen">
       <UpperTitle
         title={roomData?.RoomType?.name[i18n.language || "en"]}
         imgSrc={roomData?.RoomImages[0]?.image_name_url}
         withDesc={false}
       />
-      <RoomReservationPage roomData={roomData}/>
+      <RoomReservationPage roomData={roomData} />
     </div>
   );
 }
