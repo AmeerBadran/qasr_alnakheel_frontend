@@ -86,7 +86,7 @@ const ImageCarousel = ({ images }) => {
                       )}
                     </p>
                     <Link
-                      to={`/rooms/${src.room.id}`}
+                      to={`/rooms/roomDetails/${src.room.id}`}
                       className="mt-4 px-4 py-2 bg-yellow-700  text-white rounded hover:bg-sec-color-200 transition duration-200"
                     >
                       {t("home.ImageCarousel.button")}

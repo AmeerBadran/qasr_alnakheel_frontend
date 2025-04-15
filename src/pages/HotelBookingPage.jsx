@@ -29,7 +29,6 @@ export default function HotelBookingPage() {
     async function fetchRoomTypeWithoutDates() {
       const response = await getRoomTypeAndRoomsByTypeIdnoDates(typeId);
       const { description, id, name, Rooms } = response.data;
-      console.log(response.data);
       setMainData({ description, id, name });
       setRoomsData(Rooms);
     }
@@ -48,7 +47,7 @@ export default function HotelBookingPage() {
   const handleFilterSubmit = (newCheckIn, newCheckOut) => {
     setCheckIn(newCheckIn);
     setCheckOut(newCheckOut);
-    fetchRoomType(newCheckIn, newCheckOut); // ✅ استخدم القيم الجديدة
+    fetchRoomType(newCheckIn, newCheckOut);
   };
 
   return (

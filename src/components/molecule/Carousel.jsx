@@ -70,7 +70,7 @@ const Carousel = ({ slides }) => {
                   transition={{ delay: 0.6, duration: 0.6 }}
                   className="mt-10"
                 >
-                  <QuickBookingForm locale={locale} />
+                  <QuickBookingForm locale={locale} />{/* my forom for booking in home page */}
                 </motion.div>
               )}
             </div>

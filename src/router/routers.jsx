@@ -108,9 +108,9 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    element: <PersistLogin />,
-    children: [
+ // {
+    //element: <PersistLogin />,
+    //children: [
       {
         path: "/login",
         element: <NotProtectdRoute element={<Login />} />,
@@ -127,8 +127,8 @@ const router = createBrowserRouter([
         path: "*",
         element: () => <h1>Page Not Found</h1>,
       },
-    ],
-  },
+    //],
+  //},
 ]);
 
 export default function AppRouter() {

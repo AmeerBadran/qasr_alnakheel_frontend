@@ -14,6 +14,7 @@ const NavLinks = ({ linksLayout, bgColor, handleNavButton }) => {
   useEffect(() => {
     async function getRoomLinks() {
       const response = await getRoomTypeForNavbar();
+      console.log(response)
       setRoomTypes(response.data);
     }
 

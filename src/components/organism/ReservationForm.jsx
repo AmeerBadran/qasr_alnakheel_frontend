@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
@@ -50,7 +51,6 @@ const ReservationForm = ({ roomId, roomPricings, specialPricings }) => {
     },
   });
 
-  // حساب السعر الكلي عند تغيّر التواريخ
   useEffect(() => {
     const { check_in_date, check_out_date } = formik.values;
     if (!check_in_date || !check_out_date) return;
@@ -60,7 +60,7 @@ const ReservationForm = ({ roomId, roomPricings, specialPricings }) => {
     const days = [];
 
     for (let d = start; d.isBefore(end); d = d.add(1, "day")) {
-      days.push(d); // كل يوم فردي في الفترة
+      days.push(d);
     }
 
     let total = 0;

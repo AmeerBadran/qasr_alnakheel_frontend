@@ -10,9 +10,12 @@ import home_en from './locales/home/en';
 import home_ar from './locales/home/ar';
 import roomAndBooking_en from './locales/roomAndBooking/en';
 import roomAndBooking_ar from './locales/roomAndBooking/ar';
+import hall_en from './locales/hall/en';
+import hall_ar from './locales/hall/ar';
 
 const resources = {
   en: {
+    hall: hall_en,
     home: home_en,
     roomAndBooking: roomAndBooking_en,
     sidebar: sidebar_en,
@@ -318,6 +321,7 @@ const resources = {
     }
   },
   ar: {
+    hall: hall_ar,
     home: home_ar,
     roomAndBooking: roomAndBooking_ar,
     sidebar: sidebar_ar,
@@ -336,7 +340,7 @@ const resources = {
       "familyHallMainTexts": {
         "upperSection": {
           "title": "نظّم احتفالاً عائلياً",
-          "description": "."
+          "description": ""
         },
         "descriptionSection": {
           "title": "الاحتفالات العائلية",

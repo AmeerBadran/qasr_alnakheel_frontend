@@ -5,6 +5,7 @@ import familyImage from "../assets/images/family2.jpeg";
 import PageDescription from "../components/atoms/PageDescription";
 import ConferenceFeatures from "../components/molecule/ConferenceFeatures";
 import { useTranslation } from "react-i18next";
+import HallList from "../components/organism/HallList";
 
 export default function Hall({ hallType }) {
   const { t } = useTranslation();
@@ -20,14 +21,16 @@ export default function Hall({ hallType }) {
       <UpperTitle
         title={t(titleKey)}
         description={t(descKey)}
-        withDesc={false}
+        withDesc={true}
         imgSrc={hallType === "company" ? comImage : familyImage}
       />
       <PageDescription
         title={t(sectionTitleKey)}
         description={t(sectionDescKey)}
       />
+
       <ConferenceFeatures />
+      <HallList />
     </div>
   );
 }
