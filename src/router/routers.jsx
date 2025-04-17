@@ -10,10 +10,9 @@ import Contact from "../pages/Contact";
 import ProtectedRoute from "../components/HOC/withProtect";
 import Dashboard from "../pages/adminPages/Dashboard";
 import AdminLayout from "../components/HOC/AdminLayout";
-import AllAmenities from "../pages/adminPages/AllAmenities";
 import RoomType from "../pages/adminPages/RoomType";
 import Service from "../pages/adminPages/Service";
-import AddRoom from "../pages/adminPages/AddRoom";
+import CreateRoom from "../pages/adminPages/CreateRoom";
 import AllRoom from "../pages/adminPages/AllRoom";
 import UpdateRoom from "../pages/adminPages/UpdateRoom";
 import MainHalls from "../pages/MainHalls";
@@ -21,6 +20,7 @@ import Hall from "../pages/Hall";
 import VerificationPage from "../pages/VerificationPage";
 import PersistLogin from "../components/HOC/PersistLogin";
 import NotProtectdRoute from "../components/HOC/withNotProtect";
+import SpecialPrice from "../components/molecule/SpecialPrice";
 
 const router = createBrowserRouter([
   {
@@ -72,16 +72,12 @@ const router = createBrowserRouter([
         element: <RoomType />,
       },
       {
-        path: "allamenities",
-        element: <AllAmenities />,
-      },
-      {
         path: "allservice",
         element: <Service />,
       },
       {
-        path: "addroom",
-        element: <AddRoom />,
+        path: "createroom",
+        element: <CreateRoom />,
       },
       {
         path: "allroom",
@@ -91,6 +87,10 @@ const router = createBrowserRouter([
         path: "updateroom/:id",
         element: <UpdateRoom />,
       },
+      {
+        path: "specialprice/:id",
+        element: <SpecialPrice />,
+      }
     ],
   },
   {

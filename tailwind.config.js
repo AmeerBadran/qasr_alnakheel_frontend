@@ -17,7 +17,8 @@ export default {
       },
       colors: {
         'my-color': '#212121',
-        'sec-color': '#de8e16'
+        'sec-color': '#de8e16',
+        'admin-color': '#191c24',
       },
     },
     screens: {

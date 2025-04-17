@@ -6,7 +6,7 @@ export default {
         allAmenities: "All Amenities",
         allService: "All Service",
         allRoom: "All Rooms",
-        createRoom: "Create Room",
-        addRoom: "Add Room",
+        createroom: "Create Room",
+        
     },
 };

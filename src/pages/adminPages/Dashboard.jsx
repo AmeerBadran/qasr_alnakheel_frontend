@@ -21,7 +21,7 @@ export default function Dashboard() {
   getDashboardData()
   },[])
   return (
-    <div className="flex-1 p-4">
+    <div className="flex-1 p-4 ">
       <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 slg:grid-cols-3 gap-4">
         {cardData.length > 0 ? (

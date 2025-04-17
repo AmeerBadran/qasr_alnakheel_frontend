@@ -6,7 +6,7 @@ export default {
         allAmenities: "جميع المرافق",
         allService: "جميع الخدمات",
         allRoom: "جميع الغرف",
-        createRoom: "إنشاء غرفة",
-        addRoom: "إضافة غرفة",
+        createroom: "إنشاء غرفة",
+        
     },
 };

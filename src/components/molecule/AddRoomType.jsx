@@ -64,8 +64,8 @@ const AddRoomTypeModal = ({ isOpen, onClose, roomTypeId }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 text-black">
-      <div className="bg-gray-700 p-6 rounded shadow-lg max-w-lg w-full">
+    <div className="fixed inset-0 flex items-center justify-center bg-admin-color bg-opacity-50 z-50 text-black">
+      <div className="bg-admin-color p-6 rounded shadow-lg max-w-lg w-full">
         <div className="flex justify-between items-center">
         <h2 className="text-xl font-bold"> {!roomTypeId ? t('addRoomType') : t('updateRoomType')}</h2> 
          <button onClick={onClose} className="text-red-500 font-bold text-xl">&times;</button>

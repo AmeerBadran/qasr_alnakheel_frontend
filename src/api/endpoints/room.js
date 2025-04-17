@@ -124,15 +124,18 @@ export const getRoomTypeImage = async (roomId) => {
   return axiosInstance.get(`/room/get/RoomTypeImage/${roomId}`);
 };
 //special price
-export const addSpecialPrice = async (specialPriceData) => {
-  return axiosInstance.post(`/room/addSpecialPrice`, specialPriceData);
+export const addSpecialPrice = async (priceData) => {
+  console.log(priceData)
+  return axiosInstance.post(`/room/addSpecialPrice`, priceData);
 };
-//get all special price
-export const getAllSpecialPrice = async () => {
-  return axiosInstance.get(`/room/get/allSpecialPrice`);
+//get all special price by room id
+export const getAllSpecialPriceById = async (roomId) => {
+  return axiosInstance.get(`/room/get/specialPrice/${roomId}`);
 };
 
 //update special price
 export const updateSpecialPrice = async (specialPriceId, specialPriceData) => {
-  return axiosInstance.patch(`/room/updateSpecialPrice/${specialPriceId}`, specialPriceData);
+  console.log(specialPriceId, specialPriceData)
+  return axiosInstance.put(`/room/changeSpecialPrice/${specialPriceId}`, specialPriceData);
 };
+

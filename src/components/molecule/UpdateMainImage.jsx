@@ -4,27 +4,26 @@ import { toast } from "react-toastify";
 import { updateMainImage, addRoomImage, deleteSingleRoomImage } from "../../api/endpoints/room";
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from "react-icons/fa";
- import noImage from "../../assets/images/No_Image_Available.jpg"
-const UpdateMainImage = ({ isOpen, onClose, mainImageData,roomId, imageUrl, secondaryImages }) => {
+import noImage from "../../assets/images/No_Image_Available.jpg"
+const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, secondaryImages }) => {
   const [selectedMainFile, setSelectedMainFile] = useState(null);
   const [mainPreview, setMainPreview] = useState(null);
   const [mainLoading, setMainLoading] = useState(false);
-console.log(imageUrl)
   const [selectedSecondaryFile, setSelectedSecondaryFile] = useState(null);
   const [secondaryLoading, setSecondaryLoading] = useState(false);
 
-  const { t } = useTranslation();
+  const { t } = useTranslation("updatemainimage");
 
   useEffect(() => {
     if (imageUrl) {
-      setMainPreview(imageUrl);
+      setMainPreview(imageUrl.image_name_url || imageUrl); // تأكد من الشكل
     }
   }, [imageUrl]);
 
   useEffect(() => {
     if (selectedMainFile instanceof File) {
       const objectUrl = URL.createObjectURL(selectedMainFile);
-      setSelectedMainFile(objectUrl);
+      setMainPreview(objectUrl);
       return () => URL.revokeObjectURL(objectUrl);
     }
   }, [selectedMainFile]);
@@ -40,6 +39,9 @@ console.log(imageUrl)
     }
 
     setSelectedMainFile(file);
+
+    const previewUrl = URL.createObjectURL(file);
+    setMainPreview(previewUrl);
   };
 
   const handleSecondaryFileChange = (e) => {
@@ -108,8 +110,8 @@ console.log(imageUrl)
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50 text-black ">
-      <div className="modal-content bg-gray-700 p-6 rounded shadow-lg max-w-lg w-full max-h-[90vh] overflow-y-auto ">
+    <div className="fixed inset-0 flex items-center justify-center bg-admin-color bg-opacity-50 z-50 text-black ">
+      <div className="modal-content bg-admin-color p-6 rounded shadow-lg max-w-lg w-full max-h-[90vh] overflow-y-auto ">
         <div className="flex justify-between items-center mb-4 ">
           <h2 className="text-xl font-bold text-white">{t("updateMainImage")}</h2>
           <button onClick={onClose} className="text-red-500 font-bold text-xl">X</button>
@@ -119,7 +121,7 @@ console.log(imageUrl)
         <form onSubmit={handleMainImageSubmit}>
 
           <div className="mb-4">
-            <label className="block font-medium text-white">{t("chooseImage")}</label>
+            <label className="block font-medium text-white">{t("choosefile")}</label>
             <input
               type="file"
               accept="image/jpeg, image/jpg, image/png"
@@ -131,7 +133,7 @@ console.log(imageUrl)
           {mainPreview && (
             <div className="mb-4">
               <p className="text-white mb-2">{t("preview")}:</p>
-              <img src={mainPreview.image_name_url} alt="Preview" className="max-h-48 rounded" />
+              <img src={mainPreview} alt="Preview" className="max-h-48 rounded" />
             </div>
           )}
           <button
@@ -160,7 +162,7 @@ console.log(imageUrl)
                 </div>
               ))
             ) : (
-              <img src={noImage} alt="noImage" className="rounded-md w-24 h-24"/>
+              <img src={noImage} alt="noImage" className="rounded-md w-24 h-24" />
             )}
           </div>
 
