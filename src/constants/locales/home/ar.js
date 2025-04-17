@@ -83,26 +83,26 @@ export default {
 
     booking: {
         form: {
-            selectRoomType: "اختر نوع الغرفة",
+            selectRoomType: "نوع الغرفة",
             checkIn: "تاريخ الوصول",
             checkOut: "تاريخ المغادرة",
             adults: "البالغين",
             children: "الأطفال",
             submit: "احجز الآن",
-            success:"تم الحجز بنجاح",
+            success: "تم الحجز بنجاح",
             errors: {
-                child_guestsrequired:" عدد الأطفال مطلوب",
+                child_guestsrequired: " عدد الأطفال مطلوب",
                 check_out_required: "تاريخ المغادرة مطلوب",
                 check_in_required: "تاريخ الوصول مطلوب",
-                adult_guestsrequired:" عدد البالغين مطلوب",
+                adult_guestsrequired: " عدد البالغين مطلوب",
                 roomTypeRequired: "نوع الغرفة مطلوب",
                 required: "مطلوب",
                 failed: "فشل في الحجز",
                 min: "القيمة يجب أن تكون على الأقل 0",
             }
         },
-        quickForm:{
-            title:"احجز بسرعة",
+        quickForm: {
+            title: "احجز بسرعة",
         }
     }
 

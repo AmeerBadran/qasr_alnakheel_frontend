@@ -10,6 +10,7 @@ export default {
     extend: {
       backgroundImage: {
         'Login': "url('/assets/images/Login-background.png')",
+        'about-back': "url('/WhatsApp Image 2024-11-26 at 8.27.36 PM (1).jpeg')"
       },
       boxShadow: {
         'inner-shadow': 'inset 0px 0px 24px 13px rgba(50,255,255,0.3)',

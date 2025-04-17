@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useParams } from "react-router-dom";
 import UpperTitle from "../components/molecule/UpperTitle";
 import { useEffect, useState } from "react";
@@ -10,6 +11,10 @@ import BookingForm from "../components/organism/BookingForm";
 import familyImage from "../assets/images/familyRoom.jpeg";
 import RoomsSection from "../components/organism/RoomsSection";
 import RoomAndSuitesSection from "../components/organism/RoomAndSuitesSection";
+import {
+  getAllAvailableRoomsByDate,
+  getAllRoomTypeRoomsNoDates,
+} from "../api/endpoints/mainPages";
 
 export default function HotelBookingPage() {
   const { i18n } = useTranslation("roomAndBooking");
@@ -27,21 +32,64 @@ export default function HotelBookingPage() {
 
   useEffect(() => {
     async function fetchRoomTypeWithoutDates() {
-      const response = await getRoomTypeAndRoomsByTypeIdnoDates(typeId);
-      const { description, id, name, Rooms } = response.data;
-      setMainData({ description, id, name });
-      setRoomsData(Rooms);
+      if (typeId === "allRooms") {
+        const response = await getAllRoomTypeRoomsNoDates();
+        console.log(response.data);
+        const roomTypes = response.data;
+
+        // ندمج جميع البيانات تحت mainData وهمي ونجمع كل الغرف في مصفوفة واحدة
+        const allRooms = roomTypes.flatMap((rt) => rt.Rooms);
+        const name = {
+          en: "All Rooms",
+          ar: "جميع الغرف",
+        };
+        const description = {
+          en: "Explore all available room types",
+          ar: "استعرض جميع أنواع الغرف المتاحة",
+        };
+
+        setMainData({ name, description });
+        setRoomsData(allRooms);
+      } else {
+        const response = await getRoomTypeAndRoomsByTypeIdnoDates(typeId);
+        const { description, id, name, Rooms } = response.data;
+        setMainData({ description, id, name });
+        setRoomsData(Rooms);
+      }
     }
 
     fetchRoomTypeWithoutDates();
   }, [typeId]);
 
   async function fetchRoomType(inDate, outDate) {
-    const response = await getRoomTypeAndRoomsByTypeId(typeId, inDate, outDate);
-    const { description, id, name, Rooms } = response.data;
+    if (typeId === "allRooms") {
+      const response = await getAllAvailableRoomsByDate(inDate, outDate);
+      console.log(response.data);
+      const roomTypes = response.data;
 
-    setMainData({ description, id, name });
-    setRoomsData(Rooms);
+      const allRooms = roomTypes.flatMap((rt) => rt.Rooms);
+      const name = {
+        en: "All Available Rooms",
+        ar: "جميع الغرف المتاحة",
+      };
+      const description = {
+        en: "Explore all room types available for selected dates",
+        ar: "استعرض جميع أنواع الغرف المتاحة للتواريخ المحددة",
+      };
+
+      setMainData({ name, description });
+      setRoomsData(allRooms);
+    } else {
+      const response = await getRoomTypeAndRoomsByTypeId(
+        typeId,
+        inDate,
+        outDate
+      );
+      const { description, id, name, Rooms } = response.data;
+
+      setMainData({ description, id, name });
+      setRoomsData(Rooms);
+    }
   }
 
   const handleFilterSubmit = (newCheckIn, newCheckOut) => {
@@ -53,12 +101,14 @@ export default function HotelBookingPage() {
   return (
     <div className="flex flex-col bg-[#f6f0e8] ">
       <UpperTitle
+        showFrom={true}
         title={mainData?.name[i18n.language || "en"]}
         description={mainData?.description[i18n.language || "en"]}
         withDesc={true}
         imgSrc={roomsData[0]?.RoomImages[0]?.image_name_url || familyImage}
       />
-      <BookingForm roomTypeId={typeId} />
+      {typeId === "allRooms" && <RoomAndSuitesSection />}
+      {typeId !== "allRooms" && <BookingForm roomTypeId={typeId} />}
       <RoomsSection
         rooms={roomsData}
         roomType={mainData}
@@ -66,7 +116,7 @@ export default function HotelBookingPage() {
         initialCheckIn={checkIn}
         initialCheckOut={checkOut}
       />
-      <RoomAndSuitesSection />
+      {typeId !== "allRooms" && <RoomAndSuitesSection />}
     </div>
   );
 }

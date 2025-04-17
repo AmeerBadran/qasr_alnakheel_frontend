@@ -62,7 +62,8 @@ export default function AdminNavbar({
           to="/"
           className="text-xl flex items-center gap-3 font-bold text-white hover:text-sec-color transition-colors duration-200"
         >
-          <FaArrowRightArrowLeft/><span>Home</span>
+          <FaArrowRightArrowLeft />
+          <span>Home</span>
         </Link>
         <button
           onClick={toggleLanguage}

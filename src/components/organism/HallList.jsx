@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -9,6 +10,7 @@ import i_shape from "../../assets/images/i_shape.png";
 import geneva from "../../assets/images/geneva.png";
 import banquet from "../../assets/images/banquet.png";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const imageMap = {
   cinema,
@@ -18,14 +20,14 @@ const imageMap = {
   geneva,
   banquet,
 };
-const HallList = () => {
+const HallList = ({ myRef,hallType }) => {
   const { t, i18n } = useTranslation("hall");
   const [halls, setHalls] = useState([]);
   const [expandedHallId, setExpandedHallId] = useState(null);
 
   useEffect(() => {
     async function fetchHalls() {
-      const response = await getAllHalls();
+      const response = await getAllHalls(hallType);
       setHalls(response.data.halls);
       console.log(response.data.halls);
     }
@@ -108,7 +110,10 @@ const HallList = () => {
   };
 
   return (
-    <div className="max-w-[1300px] mx-auto p-4 gap-2 flex flex-col py-20">
+    <div
+      className="max-w-[1300px] mx-auto p-4 gap-2 flex flex-col py-20"
+      ref={myRef}
+    >
       {halls.map((hall) => {
         const { min, max } = getMinMaxCapacity(hall.capacity);
         return (
@@ -223,6 +228,15 @@ const HallList = () => {
                         />
                       ))}
                     </div>
+                  </div>
+                  <div className="flex w-full justify-center items-center">
+                    <Link
+                      to={`/hall/bookings/${hall.id}`}
+                      className="px-4 py-2 bg-sec-color-100 hover:bg-sec-color-200"
+                    >
+                      {" "}
+                      {i18n.language === "en" ? "Book Hall" : "احجز القاعة"}
+                    </Link>
                   </div>
                 </motion.div>
               )}

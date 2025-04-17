@@ -24,3 +24,15 @@ export const CreateBookingByRoomId = (bookingData) => {
     const userId = state.authData?.userId;
     return axiosInstance.post(`/booking/roomBooking/${userId}`, bookingData);
 }
+
+//Halls Booking
+export const getReservationsByHallAndDate = (hallId, date) => {
+    return axiosInstance.get(`/halls/get/getReservationsByHallAndDate/${hallId}?date=${date}`)
+}
+
+export const createHallReservation = (data) => {
+    console.log(data)
+    const state = store.getState();
+    const id = state.authData?.userId;
+    return axiosInstance.post(`/halls/hallReservation/${id}`, data)
+}

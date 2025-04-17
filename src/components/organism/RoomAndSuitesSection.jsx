@@ -32,7 +32,7 @@ export default function RoomAndSuitesSection() {
         <ImageCarousel images={roomsImages} />
       </div>
       <LinkButton
-        link="/rooms"
+        link="/rooms/allRooms"
         text={t("home.roomsSection.button")}
         size="large"
       />

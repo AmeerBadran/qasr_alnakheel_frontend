@@ -57,7 +57,7 @@ const NavLinks = ({ linksLayout, bgColor, handleNavButton }) => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className={`absolute top-8 left-0 bg-white rounded-sm shadow-md z-40 py-2 px-3 w-40 space-y-2 ${
+                    className={`absolute top-8 right-0 bg-white rounded-sm shadow-md z-40 py-2 px-3 w-40 space-y-2 ${
                       bgColor === "light" ? "text-my-color" : "text-my-color"
                     }`}
                   >

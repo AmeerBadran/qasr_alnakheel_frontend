@@ -9,9 +9,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { roomTypeData } from "../../api/endpoints/room";
 import { createBookingByRoomType } from "../../api/endpoints/booking";
 import { toast } from "react-toastify";
+import { useRef } from "react";
 
 function QuickBookingForm() {
   const [roomTypes, setRoomTypes] = useState([]);
+  const formRef = useRef(null);
   const { t, i18n } = useTranslation("home");
 
   useEffect(() => {
@@ -50,6 +52,7 @@ function QuickBookingForm() {
         .required(t("booking.form.errors.child_guestsrequired"))
         .min(0),
     }),
+
     onSubmit: async (values) => {
       const num_of_guests =
         parseInt(values.adult_guests) + parseInt(values.child_guests);
@@ -72,71 +75,81 @@ function QuickBookingForm() {
     },
   });
 
+  useEffect(() => {
+    if (formik.submitCount > 0 && Object.keys(formik.errors).length > 0) {
+      formRef.current?.scrollTo({
+        top: formRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [formik.submitCount, formik.errors]);
+
   return (
     <form
+      ref={formRef}
       onSubmit={formik.handleSubmit}
-      className="flex gap-4 rounded-full px-4 py-2 shadow-md items-center flex-wrap text-black bg-white"
+      className="grid grid-cols-1 2xmobile:grid-cols-2 max-h-[290px] overflow-y-auto lg:grid-cols-6 gap-4 rounded px-8 py-4 shadow-md items-center flex-wrap text-black bg-my-color"
     >
-      {formik.submitCount > 0 && Object.keys(formik.errors).length > 0 && (
-        <div className="w-full text-red-500">
-          <p>{Object.values(formik.errors)[0]}</p>
-        </div>
-      )}
-
       <select
         name="type"
         onChange={formik.handleChange}
         value={formik.values.type}
-        className="p-2 rounded bg-gray-200"
+        className="p-2 rounded bg-white lg:w-32 max-h-11 flex justify-center items-center lg:col-span-1 2xmobile:col-span-2"
       >
         <option value="">{t("booking.form.selectRoomType")}</option>
         {roomTypes.map((room) => (
           <option key={room.id} value={room.id}>
-            {room.name[i18n.language||room.name.en]}
+            {room.name[i18n.language || room.name.en]}
           </option>
         ))}
       </select>
+      <div className="flex 2xmobile:flex-row flex-col gap-4 w-fit 2xmobile:col-span-2">
+        <DatePicker
+          selected={formik.values.check_in_date}
+          onChange={(date) => formik.setFieldValue("check_in_date", date)}
+          placeholderText={t("booking.form.checkIn")}
+          className="p-2 rounded bg-white placeholder:text-gray-600 placeholder:text-sm w-32"
+          dateFormat="yyyy-MM-dd"
+        />
 
-      <DatePicker
-        selected={formik.values.check_in_date}
-        onChange={(date) => formik.setFieldValue("check_in_date", date)}
-        placeholderText={t("booking.form.checkIn")}
-        className="p-2 rounded bg-gray-200"
-        dateFormat="yyyy-MM-dd"
-      />
+        <DatePicker
+          selected={formik.values.check_out_date}
+          onChange={(date) => formik.setFieldValue("check_out_date", date)}
+          placeholderText={t("booking.form.checkOut")}
+          className="p-2 rounded bg-white placeholder:text-gray-600 placeholder:text-sm w-32"
+          dateFormat="yyyy-MM-dd"
+        />
+      </div>
+      <div className="flex gap-4 2xmobile:flex-row flex-col 2xmobile:col-span-2">
+        <input
+          type="number"
+          name="adult_guests"
+          placeholder={t("booking.form.adults")}
+          onChange={formik.handleChange}
+          value={formik.values.adult_guests}
+          className="p-2 bg-white placeholder:text-gray-600 placeholder:text-sm w-32"
+        />
 
-      <DatePicker
-        selected={formik.values.check_out_date}
-        onChange={(date) => formik.setFieldValue("check_out_date", date)}
-        placeholderText={t("booking.form.checkOut")}
-        className="p-2 rounded bg-gray-200"
-        dateFormat="yyyy-MM-dd"
-      />
-
-      <input
-        type="number"
-        name="adult_guests"
-        placeholder={t("booking.form.adults")}
-        onChange={formik.handleChange}
-        value={formik.values.adult_guests}
-        className="p-2 w-20 bg-gray-200"
-      />
-
-      <input
-        type="number"
-        name="child_guests"
-        placeholder={t("booking.form.children")}
-        onChange={formik.handleChange}
-        value={formik.values.child_guests}
-        className="p-2 w-20 bg-gray-200"
-      />
-
+        <input
+          type="number"
+          name="child_guests"
+          placeholder={t("booking.form.children")}
+          onChange={formik.handleChange}
+          value={formik.values.child_guests}
+          className="p-2 bg-white placeholder:text-gray-600 placeholder:text-sm w-32"
+        />
+      </div>
       <button
         type="submit"
-        className="bg-gray-800 hover:bg-gray-700 transition text-white py-2 px-4 rounded-full"
+        className="bg-gray-800 hover:bg-gray-700 transition text-white py-2 px-4 rounded lg:col-span-1 2xmobile:col-span-2"
       >
         {t("booking.form.submit")}
       </button>
+      {formik.submitCount > 0 && Object.keys(formik.errors).length > 0 && (
+        <div className="text-red-300 lg:col-span-6 2xmobile:col-span-2">
+          <p>{Object.values(formik.errors)[0]}</p>
+        </div>
+      )}
     </form>
   );
 }

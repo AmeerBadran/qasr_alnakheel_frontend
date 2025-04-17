@@ -6,8 +6,10 @@ import PageDescription from "../components/atoms/PageDescription";
 import ConferenceFeatures from "../components/molecule/ConferenceFeatures";
 import { useTranslation } from "react-i18next";
 import HallList from "../components/organism/HallList";
+import { useRef } from "react";
 
 export default function Hall({ hallType }) {
+  const myRef = useRef(null);
   const { t } = useTranslation();
 
   const titleKey = `${hallType}HallMainTexts.upperSection.title`;
@@ -27,10 +29,14 @@ export default function Hall({ hallType }) {
       <PageDescription
         title={t(sectionTitleKey)}
         description={t(sectionDescKey)}
+        targetRef={myRef}
       />
 
       <ConferenceFeatures />
-      <HallList />
+      <HallList
+        myRef={myRef}
+        hallType={hallType === "company" ? "meeting" : "party"}
+      />
     </div>
   );
 }

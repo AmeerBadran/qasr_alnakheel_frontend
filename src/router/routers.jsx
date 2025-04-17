@@ -23,6 +23,7 @@ import PersistLogin from "../components/HOC/PersistLogin";
 import NotProtectdRoute from "../components/HOC/withNotProtect";
 import HotelBookingPage from "../pages/HotelBookingPage";
 import SingleRoom from "../pages/SingleRoom";
+import { HallBooking } from "../pages/HallBooking";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
           {
             path: "/rooms/roomdetails/:id",
             element: <SingleRoom />,
+          },
+          {
+            path: "/hall/bookings/:id",
+            element: <HallBooking />,
           },
         ],
       },
@@ -108,26 +113,26 @@ const router = createBrowserRouter([
       },
     ],
   },
- // {
-    //element: <PersistLogin />,
-    //children: [
-      {
-        path: "/login",
-        element: <NotProtectdRoute element={<Login />} />,
-      },
-      {
-        path: "/signup",
-        element: <NotProtectdRoute element={<Signup />} />,
-      },
-      {
-        path: "/verificationPage/:email",
-        element: <NotProtectdRoute element={<VerificationPage />} />,
-      },
-      {
-        path: "*",
-        element: () => <h1>Page Not Found</h1>,
-      },
-    //],
+  // {
+  //element: <PersistLogin />,
+  //children: [
+  {
+    path: "/login",
+    element: <NotProtectdRoute element={<Login />} />,
+  },
+  {
+    path: "/signup",
+    element: <NotProtectdRoute element={<Signup />} />,
+  },
+  {
+    path: "/verificationPage/:email",
+    element: <NotProtectdRoute element={<VerificationPage />} />,
+  },
+  {
+    path: "*",
+    element: () => <h1>Page Not Found</h1>,
+  },
+  //],
   //},
 ]);
 

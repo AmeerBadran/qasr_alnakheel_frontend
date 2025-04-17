@@ -11,6 +11,7 @@ import { deleteAuthData } from "../../features/authData/authDataSlice";
 import { logOut } from "../../api/endpoints/auth";
 import { motion } from "framer-motion";
 import { setLanguage } from "../../features/langData/langSlice";
+import { IoLanguageSharp } from "react-icons/io5";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -65,53 +66,87 @@ function Navbar() {
             <ul className="flex gap-3 slg:gap-5 xl:gap-10 justify-center items-center p-4 ">
               <NavLinks linksLayout={"fullPage"} bgColor={"dark"} />
             </ul>
-            <div className="flex gap-1">
+            <div className="relative">
               <button
-                onClick={toggleLanguage}
-                className="relative w-20 h-10 bg-gray-700  my-auto rounded-full p-1"
+                onClick={() => setOpenNav(!openNav)}
+                className="w-11 h-11 rounded-full border-2 border-white overflow-hidden shadow-md hover:scale-105 transition-transform duration-300"
               >
-                <motion.div
-                  layout
-                  transition={{ type: "spring", stiffness: 50, damping: 10 }}
-                  className={`w-8 h-8 rounded-full bg-white hover:bg-sec-color-100 font-bold transition-colors duration-200 hover:text-white text-black flex items-center justify-center shadow-md absolute top-1 ${
-                    language === "ar" ? "right-1" : "left-1"
-                  }`}
-                >
-                  {language.toUpperCase()}
-                </motion.div>
-              </button>
-              {!id ? (
-                <>
-                  <AuthButton
-                    label="Sign Up"
-                    icon={IoMdPersonAdd}
-                    roundedPosition="left"
-                    bgType="dark"
-                    to={"signUp"}
-                  />
-                  <AuthButton
-                    label="Log In"
-                    icon={IoLogIn}
-                    roundedPosition="right"
-                    bgType="dark"
-                    to={"logIn"}
-                  />
-                </>
-              ) : (
-                <>
-                  <AuthButton
-                    label="LogOut"
-                    icon={IoLogOut}
-                    roundedPosition="full"
-                    onClick={handleLogOut}
-                    bgType="dark"
-                  />
+                {profileImage ? (
                   <img
                     src={profileImage}
                     alt="user"
-                    className="w-10 h-10 rounded-full my-auto"
+                    className="w-full h-full object-cover"
                   />
-                </>
+                ) : (
+                  <div className="bg-gradient-to-br from-gray-400 to-gray-600 w-full h-full flex items-center justify-center text-white text-xl font-bold">
+                    U
+                  </div>
+                )}
+              </button>
+
+              {openNav && (
+                <div className="absolute right-0 mt-3 w-56 bg-white shadow-2xl rounded-xl border border-gray-100 z-50 overflow-hidden animate-fadeIn">
+                  <ul className="flex flex-col py-2">
+                    {id && (
+                      <li>
+                        <Link
+                          to="/profile"
+                          onClick={() => setOpenNav(false)}
+                          className="flex items-center gap-2 px-4 py-3 text-sm text-gray-800 font-bold hover:bg-gray-50 transition-colors duration-200"
+                        >
+                          <IoMdPersonAdd className="text-lg text-my-color" />
+                          Profile
+                        </Link>
+                      </li>
+                    )}
+                    <li>
+                      <button
+                        onClick={toggleLanguage}
+                        className="w-full text-left flex items-center gap-2 px-4 py-3 text-sm font-bold text-gray-800 hover:bg-gray-50 transition-colors duration-200"
+                      >
+                        <IoLanguageSharp />
+                        {language === "en" ? "العربية" : "English"}
+                      </button>
+                    </li>
+                    {!id ? (
+                      <>
+                        <li>
+                          <Link
+                            to="/signUp"
+                            onClick={() => setOpenNav(false)}
+                            className="flex items-center gap-2 px-4 py-3 text-sm text-gray-800 font-bold hover:bg-gray-50 transition-colors duration-200"
+                          >
+                            <IoMdPersonAdd className="text-lg text-my-color" />
+                            Sign Up
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/logIn"
+                            onClick={() => setOpenNav(false)}
+                            className="flex items-center gap-2 px-4 py-3 text-sm text-gray-800 font-bold hover:bg-gray-50 transition-colors duration-200"
+                          >
+                            <IoLogIn className="text-lg text-my-color" />
+                            Log In
+                          </Link>
+                        </li>
+                      </>
+                    ) : (
+                      <li>
+                        <button
+                          onClick={() => {
+                            handleLogOut();
+                            setOpenNav(false);
+                          }}
+                          className="w-full text-left flex items-center gap-2 px-4 py-3 font-bold text-sm text-red-600 hover:bg-red-50 transition-colors duration-200"
+                        >
+                          <IoLogOut className="text-lg" />
+                          Log Out
+                        </button>
+                      </li>
+                    )}
+                  </ul>
+                </div>
               )}
             </div>
           </>

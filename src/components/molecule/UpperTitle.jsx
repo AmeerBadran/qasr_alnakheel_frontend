@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { motion } from "framer-motion";
 import LinkButton from "../atoms/LinkButton";
+import QuickBookingForm from "../organism/QuickBookingForm";
 
 export default function UpperTitle({
   title,
@@ -9,9 +10,15 @@ export default function UpperTitle({
   imgSrc,
   to,
   bottonLabel,
+  short = false,
+  showFrom = false,
 }) {
   return (
-    <div className="relative flex justify-center items-center h-[550px] w-full overflow-hidden">
+    <div
+      className={`relative flex justify-center items-center ${
+        short ? "h-[340px]" : "h-[550px]"
+      } w-full overflow-hidden`}
+    >
       <img
         src={imgSrc}
         alt={title}
@@ -44,10 +51,16 @@ export default function UpperTitle({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 1 }}
               >
-                <LinkButton link={`/${to}`} text={bottonLabel} size="large" />
+                <LinkButton link={`/${to}`} text={bottonLabel} size="large" />:
               </motion.div>
             )}
           </>
+        )}
+
+        {showFrom && (
+          <div className="mt-14">
+            <QuickBookingForm />
+          </div>
         )}
       </motion.div>
     </div>

@@ -11,7 +11,7 @@ export const MyCarousel = () => {
       image: mainImage,
       text: t("home.upperSection.main.title"),
       description: t("home.upperSection.main.description"),
-      link: "/booking",
+      link: "/rooms/allRooms",
       buttonText: t("home.upperSection.main.button"),
       showForm:"roomBooking",
     },
