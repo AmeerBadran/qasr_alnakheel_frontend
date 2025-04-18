@@ -7,6 +7,7 @@ export default {
         allService: "جميع الخدمات",
         allRoom: "جميع الغرف",
         createroom: "إنشاء غرفة",
-        
+        employee: "الموظف",
+
     },
 };

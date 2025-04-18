@@ -21,7 +21,7 @@ import VerificationPage from "../pages/VerificationPage";
 import PersistLogin from "../components/HOC/PersistLogin";
 import NotProtectdRoute from "../components/HOC/withNotProtect";
 import SpecialPrice from "../components/molecule/SpecialPrice";
-
+import Employee from "../pages/adminPages/Employee";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -90,7 +90,12 @@ const router = createBrowserRouter([
       {
         path: "specialprice/:id",
         element: <SpecialPrice />,
+      },
+      {
+        path: "employee",
+        element: <Employee />
       }
+
     ],
   },
   {
