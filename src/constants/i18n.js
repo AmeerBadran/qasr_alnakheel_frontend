@@ -6,12 +6,23 @@ import sidebar_en from './locales/sidebar/en';
 import sidebar_ar from './locales/sidebar/ar';
 import signUp_en from './locales/signUp/en';
 import signUp_ar from './locales/signUp/ar';
+
+import specialprice_en from './locales/specialprice/en';
+import specialprice_ar from './locales/specialprice/ar';
+import roomoverview_en from './locales/roomoverview/en';
+import roomoverview_ar from './locales/roomoverview/ar';
+import updateroom_en from './locales/updateroom/en';
+import updateroom_ar from './locales/updateroom/ar';
+import updatemainimage_en from './locales/updatemainimage/en';
+import updatemainimage_ar from './locales/updatemainimage/ar';
+
 import home_en from './locales/home/en';
 import home_ar from './locales/home/ar';
 import roomAndBooking_en from './locales/roomAndBooking/en';
 import roomAndBooking_ar from './locales/roomAndBooking/ar';
 import hall_en from './locales/hall/en';
 import hall_ar from './locales/hall/ar';
+
 
 const resources = {
   en: {
@@ -20,6 +31,10 @@ const resources = {
     roomAndBooking: roomAndBooking_en,
     sidebar: sidebar_en,
     signUp: signUp_en,
+    specialprice: specialprice_en,
+    roomoverview: roomoverview_en,
+    singleUpdateroom: updateroom_en,
+    updatemainimage: updatemainimage_en,
     translation: {
 
       "companyHallMainTexts": {
@@ -147,7 +162,7 @@ const resources = {
       "headerDescription": "Description",
       "headerServiceNumber": "Service number",
       "headerAction": "Action",
-      "headerAllRooms": "All Rooms",
+      "headerRoomType": "Room Type",
       "roomTable": {
         "title": "Title",
         "description": "Description",
@@ -201,7 +216,7 @@ const resources = {
       },
 
 
-      "add_room": {
+      "createroom": {
         "title": "Create Room",
         "edit_title": "Edit Room",
         "select_default": "Select...",
@@ -326,6 +341,10 @@ const resources = {
     roomAndBooking: roomAndBooking_ar,
     sidebar: sidebar_ar,
     signUp: signUp_ar,
+    specialprice: specialprice_ar,
+    roomoverview: roomoverview_ar,
+    singleUpdateroom: updateroom_ar,
+    updatemainimage: updatemainimage_ar,
     translation: {
       "companyHallMainTexts": {
         "upperSection": {
@@ -403,7 +422,7 @@ const resources = {
         "view_details": "عرض التفاصيل",
         "delete": "حذف"
       },
-      "add_room": {
+      "createroom": {
         "title": "إنشاء غرفة",
         "edit_title": "تعديل الغرفة",
         "select_default": "اختر...",

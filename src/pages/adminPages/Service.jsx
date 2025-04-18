@@ -53,28 +53,27 @@ export default function Service() {
   };
 
   return (
-    <div className="p-6 bg-gray-900 text-white min-h-screen">
+    <div className="p-6 bg-admin-color text-white min-h-screen">
       <h2 className="text-2xl font-semibold mb-4">{t("headerAllService")}</h2>
-      <div className="bg-gray-800 p-4 rounded-lg">
+      <div className="bg-admin-color p-4 rounded-lg">
         <div className="flex justify-between items-center mb-4">
           <button onClick={() => openModal(null)} className="bg-green-500 text-white px-4 py-2 rounded">
             {t("headerServices")}
           </button>
         </div>
-        <table className="w-full text-left text-sm text-gray-400">
-          <thead className="bg-gray-700 text-white">
+        <table className="w-full text-left text-sm text-gray-400 border">
+          <thead className="bg-admin-color  text-white">
             <tr>
               <th className='p-3'></th>
               <th className="p-3">{t("serviceTable.title")}</th>
-              <th className="p-3">{t("serviceTable.description")}</th>
-              <th className="p-3">{t("serviceTable.serviceNumber")}</th>
+              <th className="p-3">{t("serviceTable.description")}</th> 
               <th className="p-3">{t("serviceTable.action")}</th>
             </tr>
           </thead>
           <tbody>
             {services.length > 0 ? (
               services.map((s, index) => (
-                <tr key={index} className="border-b border-gray-600 hover:bg-gray-700">
+                <tr key={index} className="border-b border-gray-600 ">
                   <td className='p-3'>
                     <img src={s.image} className='size-8' />
                   </td>

@@ -10,10 +10,9 @@ import Contact from "../pages/Contact";
 import ProtectedRoute from "../components/HOC/withProtect";
 import Dashboard from "../pages/adminPages/Dashboard";
 import AdminLayout from "../components/HOC/AdminLayout";
-import AllAmenities from "../pages/adminPages/AllAmenities";
 import RoomType from "../pages/adminPages/RoomType";
 import Service from "../pages/adminPages/Service";
-import AddRoom from "../pages/adminPages/AddRoom";
+import CreateRoom from "../pages/adminPages/CreateRoom";
 import AllRoom from "../pages/adminPages/AllRoom";
 import UpdateRoom from "../pages/adminPages/UpdateRoom";
 import MainHalls from "../pages/MainHalls";
@@ -21,9 +20,13 @@ import Hall from "../pages/Hall";
 import VerificationPage from "../pages/VerificationPage";
 import PersistLogin from "../components/HOC/PersistLogin";
 import NotProtectdRoute from "../components/HOC/withNotProtect";
+
+import SpecialPrice from "../components/molecule/SpecialPrice";
+
 import HotelBookingPage from "../pages/HotelBookingPage";
 import SingleRoom from "../pages/SingleRoom";
 import { HallBooking } from "../pages/HallBooking";
+
 
 const router = createBrowserRouter([
   {
@@ -74,43 +77,39 @@ const router = createBrowserRouter([
     ],
   },
   {
-    element: <PersistLogin />,
+  path: "/admin",
+    //element: <ProtectedRoute element={<AdminLayout />} />,
+        element: <AdminLayout />,
     children: [
       {
-        path: "/admin",
-        //element: <ProtectedRoute element={<AdminLayout />} />,
-        element: <AdminLayout />,
-        children: [
-          {
-            index: true,
-            element: <Dashboard />,
-          },
-          {
-            path: "roomtype",
-            element: <RoomType />,
-          },
-          {
-            path: "allamenities",
-            element: <AllAmenities />,
-          },
-          {
-            path: "allservice",
-            element: <Service />,
-          },
-          {
-            path: "addroom",
-            element: <AddRoom />,
-          },
-          {
-            path: "allroom",
-            element: <AllRoom />,
-          },
-          {
-            path: "updateroom/:id",
-            element: <UpdateRoom />,
-          },
-        ],
+
+        index: true,
+        element: <Dashboard />,
       },
+      {
+        path: "roomtype",
+        element: <RoomType />,
+      },
+      {
+        path: "allservice",
+        element: <Service />,
+      },
+      {
+        path: "createroom",
+        element: <CreateRoom />,
+      },
+      {
+        path: "allroom",
+        element: <AllRoom />,
+      },
+      {
+        path: "updateroom/:id",
+        element: <UpdateRoom />,
+      },
+      {
+        path: "specialprice/:id",
+        element: <SpecialPrice />,
+      }
     ],
   },
   // {

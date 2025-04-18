@@ -1,8 +1,11 @@
 import { RiDashboard2Fill } from "react-icons/ri";
-import { IoHomeOutline } from "react-icons/io5";
-import { MdOutlineBedroomParent, MdOutlineCreateNewFolder } from "react-icons/md";
-import { IoIosMenu } from "react-icons/io";
+import { MdOutlineBedroomParent } from "react-icons/md";
+import { IoIosAddCircle } from "react-icons/io";
+
 import { FaMoneyCheckDollar } from "react-icons/fa6";
+import { FaEye } from "react-icons/fa";
+import { MdRoomService } from "react-icons/md";
+
 
 const sidebarItems = [
   {
@@ -11,53 +14,40 @@ const sidebarItems = [
     data: {
       to: "/admin/",
       icon: RiDashboard2Fill,
-      label: "sidebar.dashboard", 
+      label: "sidebar.dashboard",
       iconColor: "text-purple-700",
     },
   },
   {
     typeLink: "dropdown",
-    Icon: IoHomeOutline,
+    Icon: MdOutlineBedroomParent,
     label: "sidebar.room", // مفتاح i18n
     iconColor: "text-amber-500",
-    data: [
-      {
-        to: "/admin/roomtype",
-        icon: MdOutlineBedroomParent,
-        label: "sidebar.roomType",
-        iconColor: "text-amber-500",
-      },
-      {
-        to: "/admin/allamenities",
-        icon: IoIosMenu,
-        label: "sidebar.allAmenities",
-        iconColor: "text-[#007bff]",
-      },
-      {
-        to: "/admin/allservice",
-        icon: IoIosMenu,
-        label: "sidebar.allService",
-        iconColor: "text-[#007bff]",
-      },
-      {
-        to: "/admin/allroom",
-        icon: IoIosMenu,
-        label: "sidebar.allRoom",
-        iconColor: "text-[#007bff]",
-      },
-    ],
-  },
-  {
-    typeLink: "dropdown",
-    Icon: MdOutlineCreateNewFolder,
-    label: "sidebar.createRoom", // مفتاح i18n
-    iconColor: "text-amber-500",
-    data: [
-      {
-        to: "/admin/addroom",
-        icon: MdOutlineBedroomParent,
-        label: "sidebar.addRoom",
-      },
+    data: [{
+      to: "/admin/allroom",
+      icon: FaEye,
+      label: "sidebar.allRoom",
+      iconColor: "text-[#007bff]",
+    },
+    {
+      to: "/admin/roomtype",
+      icon: MdOutlineBedroomParent,
+      label: "sidebar.roomType",
+      iconColor: "text-amber-500",
+    },
+    
+    {
+      to: "/admin/allservice",
+      icon: MdRoomService,
+      label: "sidebar.allService",
+      iconColor: "text-[#007bff]",
+    },
+    
+    {
+      to: "/admin/createroom",
+      icon: IoIosAddCircle,
+      label: "sidebar.createroom",
+    },
     ],
   },
 ];

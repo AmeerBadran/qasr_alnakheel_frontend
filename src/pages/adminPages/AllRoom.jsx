@@ -7,6 +7,8 @@ import { FaEye } from "react-icons/fa";
 import RoomModal from "../../components/organism/RoomModal";
 import { MdDelete } from "react-icons/md";
 import { useTranslation } from 'react-i18next';
+import { GiPriceTag } from "react-icons/gi";
+import SpecialPrice from "../../components/molecule/SpecialPrice";
 
 export default function AllRoom() {
     const { t, i18n } = useTranslation();
@@ -15,6 +17,9 @@ export default function AllRoom() {
     const [selectedRoom, setSelectedRoom] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isSpecialOpen, setIsSpecialOpen] = useState(false);
+    const [selectedRoomIdForSpecial, setSelectedRoomIdForSpecial] = useState(null);
+
 
     useEffect(() => {
         const fetchRooms = async () => {
@@ -68,13 +73,13 @@ export default function AllRoom() {
     };
 
     return (
-        <div className="p-4 md:p-8">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+        <div className="p-4 md:p-8 bg-admin-color">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4 ">
                 <h1 className="text-2xl font-semibold text-white">{t('all_rooms.title')}</h1>
                 <div className="flex items-center gap-4">
 
                     <button
-                        onClick={() => navigate("/admin/addroom")}
+                        onClick={() => navigate("/admin/createroom")}
                         className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
                     >
                         {t('all_rooms.create_new')}
@@ -94,10 +99,10 @@ export default function AllRoom() {
                 </div>
             )}
 
-            <div className="overflow-x-auto bg-gray-800 p-4 rounded">
-                <table className="min-w-full text-white border border-gray-700">
+            <div className="overflow-x-auto bg-admin-color p-4 rounded">
+                <table className="min-w-full text-white border bg-admin-color">
                     <thead>
-                        <tr className="border-b border-gray-600 text-left">
+                        <tr className="border-b bg-admin-color text-left">
                             <th className="p-2">{t('all_rooms.room_no')}</th>
                             <th className="p-2">{t('all_rooms.category')}</th>
                             <th className="p-2">{t('all_rooms.type')}</th>
@@ -123,10 +128,10 @@ export default function AllRoom() {
                             </tr>
                         ) : (
                             rooms.map((room) => (
-                                <tr key={room.id} className="border-b border-gray-700 text-sm hover:bg-gray-700">
+                                <tr key={room.id} className="border-b border-gray-700 text-sm ">
                                     <td className="p-2 flex items-center gap-2">
                                         <img
-                                            src={`https://qasr-alnakheel.onrender.com/uploads/roomImages/${room.RoomImages?.[0]?.image_name_url}`}
+                                            src={room.RoomImages?.[0]?.image_name_url}
                                             alt="Room"
                                             className="w-10 h-10 object-cover rounded"
                                         />
@@ -165,6 +170,9 @@ export default function AllRoom() {
                                             <MdDelete className=" text-red-600 hover:text-red-400 text-lg" />
                                         </button>
                                         <Link to={`/admin/updateroom/${room.id}`} className="hover:rotate-12">✏️</Link>
+                                        <button onClick={() => { setSelectedRoomIdForSpecial(room.id); setIsSpecialOpen(true); }} className="text-green-600 hover:scale-110 transition">
+                                            <GiPriceTag size={20} />
+                                        </button>
                                     </td>
                                 </tr>
                             ))
@@ -176,6 +184,18 @@ export default function AllRoom() {
             {selectedRoom &&
                 <RoomModal room={selectedRoom.room} onClose={() => setSelectedRoom(null)} />
             }
+            {isSpecialOpen && (
+                <SpecialPrice
+                    isOpen={isSpecialOpen}
+                    onClose={() => {
+                        setIsSpecialOpen(false);
+                        setSelectedRoomIdForSpecial();
+                    }}
+                    roomId={selectedRoomIdForSpecial}
+                />
+                
+            )}
+
         </div>
     );
 }

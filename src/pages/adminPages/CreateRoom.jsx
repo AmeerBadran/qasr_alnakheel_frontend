@@ -45,7 +45,7 @@ const AddRoom = () => {
     additionalImages: [],
     room_no: "",
     type: "",
-    capacity: '',
+    //capacity: '',
     room_length: '',
     num_of_baths: '',
     adult_guests: '',
@@ -67,18 +67,18 @@ const AddRoom = () => {
   };
 
   const validationSchema = Yup.object({
-    room_no: Yup.string().required(t('add_room.validation.required')),
-    type: Yup.string().required(t('add_room.validation.required')),
-    capacity: Yup.number()
-      .required(t('add_room.validation.required'))
-      .positive(t('add_room.validation.positive')),
+    room_no: Yup.string().required(t('createroom.validation.required')),
+    type: Yup.string().required(t('createroom.validation.required')),
+    // capacity: Yup.number()
+    //   .required(t('createroom.validation.required'))
+    //   .positive(t('createroom.validation.positive')),
     room_length: Yup.number()
-      .required(t('add_room.validation.required'))
-      .positive(t('add_room.validation.positive')),
+      .required(t('createroom.validation.required'))
+      .positive(t('createroom.validation.positive')),
     num_of_baths: Yup.number()
-      .required(t('add_room.validation.required'))
-      .positive(t('add_room.validation.positive')),
-    mainImage: Yup.mixed().required(t('add_room.validation.required')),
+      .required(t('createroom.validation.required'))
+      .positive(t('createroom.validation.positive')),
+    mainImage: Yup.mixed().required(t('createroom.validation.required')),
     pricing: Yup.array().of(
       Yup.object({
         day: Yup.string().required(),
@@ -91,10 +91,12 @@ const AddRoom = () => {
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
+      const capacity = parseInt(values.adult_guests) + parseInt(values.child_guests);
+      console.log(capacity)
       const formData = new FormData();
       formData.append('room_no', values.room_no);
       formData.append('type', values.type);
-      formData.append('capacity', values.capacity);
+      formData.append('capacity', capacity);
       formData.append('room_length', values.room_length);
       formData.append('num_of_baths', values.num_of_baths);
       formData.append('adult_guests', values.adult_guests);
@@ -119,7 +121,7 @@ const AddRoom = () => {
         const res = await addRoom(formData);
         toast.success(res.data.message);
       } catch (error) {
-        toast.error(t('add_room.errors.create_failed'));
+        toast.error(t('createroom.errors.create_failed'));
       }
     }
   });
@@ -139,7 +141,7 @@ const AddRoom = () => {
     if (files.length > 0 && files.length <= 10) {
       formik.setFieldValue('additionalImages', files);
     } else {
-      toast.warning(t('add_room.validation.max_images'));
+      toast.warning(t('createroom.validation.max_images'));
     }
   };
 
@@ -150,27 +152,27 @@ const AddRoom = () => {
   };
 
   return (
-    <div className="bg-gray-900 p-4 sm:p-6 text-white max-w-7xl mx-auto rounded-lg">
+    <div className="bg-admin-color p-4 sm:p-6 text-white max-w-7xl mx-auto rounded-lg">
       <h2 className="text-xl sm:text-2xl font-semibold mb-6 text-center">
-        {roomId ? t('add_room.edit_title') : t('add_room.title')}
+        {roomId ? t('createroom.edit_title') : t('createroom.title')}
       </h2>
 
       {/* Language Selector */}
 
       <form onSubmit={formik.handleSubmit}>
         <div className="flex flex-col lg:flex-row gap-6">
-          
+
           {/* Left Column - Form Fields */}
           <div className="flex-1 space-y-6">
-            
+
             {/* Basic Information Section */}
-            <div className="bg-gray-800 p-4 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4">{t('add_room.sections.basic_info')}</h3>
+            <div className="bg-admin-color p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">{t('createroom.sections.basic_info')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Room Number */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.room_number')}
+                    {t('createroom.fields.room_number')}
                   </label>
                   <input
                     type="text"
@@ -187,7 +189,7 @@ const AddRoom = () => {
                 {/* Room Type */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.room_type')}
+                    {t('createroom.fields.room_type')}
                   </label>
                   <select
                     name="type"
@@ -195,7 +197,7 @@ const AddRoom = () => {
                     onChange={formik.handleChange}
                     value={formik.values.type}
                   >
-                    <option value="">{t('add_room.select_default')}</option>
+                    <option value="">{t('createroom.select_default')}</option>
                     {roomType.map((type) => (
                       <option key={type.id} value={type.id}>
                         {type.name[i18n.language] || type.name.en}
@@ -207,10 +209,10 @@ const AddRoom = () => {
                   )}
                 </div>
 
-                {/* Capacity */}
+                {/* Capacity
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.capacity')}
+                    {t('createroom.fields.capacity')}
                   </label>
                   <input
                     type="number"
@@ -222,12 +224,12 @@ const AddRoom = () => {
                   {formik.touched.capacity && formik.errors.capacity && (
                     <div className="text-red-400 text-sm">{formik.errors.capacity}</div>
                   )}
-                </div>
+                </div> */}
 
                 {/* Room Length */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.room_length')}
+                    {t('createroom.fields.room_length')}
                   </label>
                   <input
                     type="number"
@@ -244,7 +246,7 @@ const AddRoom = () => {
                 {/* Number of Baths */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.num_baths')}
+                    {t('createroom.fields.num_baths')}
                   </label>
                   <input
                     type="number"
@@ -261,7 +263,7 @@ const AddRoom = () => {
                 {/* Adult Guests */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.adult_guests')}
+                    {t('createroom.fields.adult_guests')}
                   </label>
                   <input
                     type="text"
@@ -275,7 +277,7 @@ const AddRoom = () => {
                 {/* Child Guests */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.child_guests')}
+                    {t('createroom.fields.child_guests')}
                   </label>
                   <input
                     type="text"
@@ -289,13 +291,13 @@ const AddRoom = () => {
             </div>
 
             {/* Category Information Section */}
-            <div className="bg-gray-800 p-4 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4">{t('add_room.sections.category_info')}</h3>
+            <div className="bg-admin-color p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">{t('createroom.sections.category_info')}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Category (Arabic) */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.category_ar')}
+                    {t('createroom.fields.category_ar')}
                   </label>
                   <input
                     type="text"
@@ -309,7 +311,7 @@ const AddRoom = () => {
                 {/* Category (English) */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.category_en')}
+                    {t('createroom.fields.category_en')}
                   </label>
                   <input
                     type="text"
@@ -323,7 +325,7 @@ const AddRoom = () => {
                 {/* Bed Type (Arabic) */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.bed_type_ar')}
+                    {t('createroom.fields.bed_type_ar')}
                   </label>
                   <input
                     type="text"
@@ -337,7 +339,7 @@ const AddRoom = () => {
                 {/* Bed Type (English) */}
                 <div>
                   <label className="block text-sm font-medium mb-1">
-                    {t('add_room.fields.bed_type_en')}
+                    {t('createroom.fields.bed_type_en')}
                   </label>
                   <input
                     type="text"
@@ -351,13 +353,13 @@ const AddRoom = () => {
             </div>
 
             {/* Dynamic Pricing Section */}
-            <div className="bg-gray-800 p-4 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4">{t('add_room.sections.pricing')}</h3>
+            <div className="bg-admin-color p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">{t('createroom.sections.pricing')}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {formik.values.pricing.map((item, index) => (
                   <div key={item.day} className="flex items-center justify-between bg-gray-700 p-3 rounded">
                     <span className="font-medium">
-                      {t(`add_room.days.${item.day}`)}:
+                      {t(`createroom.days.${item.day}`)}:
                     </span>
                     <div className="flex items-center">
                       <span className="mr-2">$</span>
@@ -376,8 +378,8 @@ const AddRoom = () => {
             </div>
 
             {/* Amenities Section */}
-            <div className="bg-gray-800 p-4 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4">{t('add_room.sections.amenities')}</h3>
+            <div className="bg-admin-color p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">{t('createroom.sections.amenities')}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {services.map((service) => {
                   const isChecked = formik.values.services.includes(service.id);
@@ -409,8 +411,8 @@ const AddRoom = () => {
           {/* Right Column - Images */}
           <div className="w-full lg:w-96 space-y-6">
             {/* Featured Image Upload */}
-            <div className="bg-gray-800 p-4 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4">{t('add_room.sections.featured_image')}</h3>
+            <div className="bg-admin-color p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">{t('createroom.sections.featured_image')}</h3>
               <div className="border-2 border-dashed border-gray-600 rounded-lg p-4 text-center cursor-pointer hover:bg-gray-700 transition-colors">
                 <input
                   type="file"
@@ -428,10 +430,10 @@ const AddRoom = () => {
                         className="max-h-48 mb-2 rounded object-cover"
                       />
                       <p className="text-sm text-gray-300">
-                        {formik.values.mainImage?.name || t('add_room.sections.featured_image')}
+                        {formik.values.mainImage?.name || t('createroom.sections.featured_image')}
                       </p>
                       <p className="text-xs text-blue-400 mt-1">
-                        {t('add_room.actions.change_image')}
+                        {t('createroom.actions.change_image')}
                       </p>
                     </div>
                   ) : (
@@ -439,8 +441,8 @@ const AddRoom = () => {
                       <svg className="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
-                      <p className="text-sm text-gray-300">{t('add_room.actions.upload_featured')}</p>
-                      <p className="text-xs text-gray-400 mt-1">{t('add_room.labels.recommended_size')}</p>
+                      <p className="text-sm text-gray-300">{t('createroom.actions.upload_featured')}</p>
+                      <p className="text-xs text-gray-400 mt-1">{t('createroom.labels.recommended_size')}</p>
                     </div>
                   )}
                 </label>
@@ -451,8 +453,8 @@ const AddRoom = () => {
             </div>
 
             {/* Additional Images Upload */}
-            <div className="bg-gray-800 p-4 rounded-lg">
-              <h3 className="text-lg font-semibold mb-4">{t('add_room.sections.additional_images')}</h3>
+            <div className="bg-admin-color p-4 rounded-lg">
+              <h3 className="text-lg font-semibold mb-4">{t('createroom.sections.additional_images')}</h3>
               <div className="border-2 border-dashed border-gray-600 rounded-lg p-4 text-center cursor-pointer hover:bg-gray-700 transition-colors">
                 <input
                   type="file"
@@ -467,13 +469,13 @@ const AddRoom = () => {
                     <svg className="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <p className="text-sm text-gray-300">{t('add_room.actions.upload_additional')}</p>
+                    <p className="text-sm text-gray-300">{t('createroom.actions.upload_additional')}</p>
                     {formik.values.additionalImages.length > 0 ? (
                       <p className="text-sm text-green-400 mt-2">
-                        {formik.values.additionalImages.length} {t('add_room.labels.images_selected')}
+                        {formik.values.additionalImages.length} {t('createroom.labels.images_selected')}
                       </p>
                     ) : (
-                      <p className="text-xs text-gray-400 mt-1">{t('add_room.labels.max_images')}</p>
+                      <p className="text-xs text-gray-400 mt-1">{t('createroom.labels.max_images')}</p>
                     )}
                   </div>
                 </label>
@@ -492,10 +494,10 @@ const AddRoom = () => {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  {t('add_room.actions.processing')}
+                  {t('createroom.actions.processing')}
                 </span>
               ) : (
-                t('add_room.actions.publish')
+                t('createroom.actions.publish')
               )}
             </button>
           </div>
