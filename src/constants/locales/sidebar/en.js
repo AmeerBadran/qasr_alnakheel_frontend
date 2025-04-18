@@ -7,6 +7,7 @@ export default {
         allService: "All Service",
         allRoom: "All Rooms",
         createroom: "Create Room",
+        employee: "Employee",
     },
     navbar: {
         home: "Home",

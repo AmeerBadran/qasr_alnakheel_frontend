@@ -2,11 +2,7 @@
 
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-import {
-  getAllSpecialPriceById,
-  addSpecialPrice,
-  updateSpecialPrice,
-} from "../../api/endpoints/room";
+import { getAllSpecialPriceById, addSpecialPrice, updateSpecialPrice } from "../../api/endpoints/room";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
@@ -17,20 +13,23 @@ import SpecialPriceItem from "../organism/SpecialPriceItem";
 const SpecialPrice = ({ isOpen, onClose, roomId }) => {
   const { t, i18n } = useTranslation("specialprice");
   const lang = i18n.language || "en";
-
   const [specialPrices, setSpecialPrices] = useState([]);
   const [editingPriceId, setEditingPriceId] = useState(null);
   const [loading, setLoading] = useState(false);
 
+
+
   async function fetchPrices() {
     try {
       const response = await getAllSpecialPriceById(roomId);
-      console.log(response.data);
-      setSpecialPrices(response.data);
-      console.log(response.data);
+      const data = response.data;
+
+      // تأكد أن البيانات مصفوفة، وإلا خليها مصفوفة فاضية
+      setSpecialPrices(Array.isArray(data) ? data : []);
     } catch (err) {
       toast.error(t("specialprice.fetchError"));
       console.error(err);
+      setSpecialPrices([]); // fallback حتى لو فشل الطلب
     }
   }
 
@@ -49,7 +48,7 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
       description_en: "",
       start_date: "",
       end_date: "",
-      price: "",
+      price: ""
     },
     validationSchema: Yup.object({
       room_id: Yup.string().required("رقم الغرفة مطلوب"),
@@ -59,9 +58,7 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
       description_en: Yup.string().required("الوصف بالإنجليزية مطلوب"),
       start_date: Yup.date().required("تاريخ البداية مطلوب"),
       end_date: Yup.date().required("تاريخ النهاية مطلوب"),
-      price: Yup.number()
-        .required("السعر مطلوب")
-        .positive("السعر يجب أن يكون موجب"),
+      price: Yup.number().required("السعر مطلوب").positive("السعر يجب أن يكون موجب"),
     }),
     onSubmit: async (values, { resetForm }) => {
       const formatDateOnly = (dateStr) => {
@@ -83,7 +80,7 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
         const endDate = new Date(values.end_date);
 
         if (startDate < today || endDate < today) {
-          toast.error(t("specialprice.invalidDates"));
+          toast.error(t("specialprice.invalidDates"))
           setLoading(false);
           return;
         }
@@ -101,24 +98,27 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
 
         if (editingPriceId) {
           await updateSpecialPrice(editingPriceId, payload); // This sends the special price ID
-          toast.success(t("specialprice.updateSuccess"));
+          toast.success(t("specialprice.updateSuccess"))
           console.log("editingPriceId:", editingPriceId);
+
         } else {
           await addSpecialPrice(payload); // This sends the room ID for creating a new special price
-          toast.success(t("specialprice.addSuccess"));
+          toast.success(t("specialprice.addSuccess"))
         }
 
         fetchPrices();
         resetForm();
         setEditingPriceId(null);
       } catch (error) {
-        toast.error(t("specialprice.saveError"));
+        toast.error(t("specialprice.saveError"))
         console.error(error);
       } finally {
         setLoading(false);
       }
-    },
+    }
+
   });
+
 
   if (!isOpen) return null;
 
@@ -126,15 +126,8 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-admin-color  bg-opacity-90 z-50">
       <div className="bg-admin-color p-6 rounded-lg shadow-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto">
         <div className="flex relative justify-between mb-4 text-white">
-          <h2 className="text-3xl font-extrabold mb-8 text-center border-b border-gray-700 pb-4">
-            {editingPriceId
-              ? t("specialprice.updateTitle")
-              : t("specialprice.addTitle")}
-          </h2>
-          <button
-            onClick={onClose}
-            className="absolute right-0 text-white text-2xl hover:text-red-400 transition"
-          >
+          <h2 className="text-3xl font-extrabold mb-8 text-center border-b border-gray-700 pb-4">{editingPriceId ? t("specialprice.updateTitle") : t("specialprice.addTitle")}</h2>
+          <button onClick={onClose} className="absolute right-0 text-white text-2xl hover:text-red-400 transition">
             <IoMdClose />
           </button>
         </div>
@@ -143,9 +136,7 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
         <form onSubmit={formik.handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block font-semibold text-white">
-                {t("specialprice.nameAr")}
-              </label>
+              <label className="block font-semibold text-white">{t("specialprice.nameAr")}</label>
               <input
                 type="text"
                 name="name_ar"
@@ -160,9 +151,7 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
             </div>
 
             <div>
-              <label className="block font-semibold text-white">
-                {t("specialprice.nameEn")}
-              </label>
+              <label className="block font-semibold text-white">{t("specialprice.nameEn")}</label>
               <input
                 type="text"
                 name="name_en"
@@ -177,9 +166,7 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
             </div>
 
             <div>
-              <label className="block font-semibold text-white">
-                {t("specialprice.descriptionAr")}
-              </label>
+              <label className="block font-semibold text-white">{t("specialprice.descriptionAr")}</label>
               <input
                 type="text"
                 name="description_ar"
@@ -188,18 +175,13 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
                 onBlur={formik.handleBlur}
                 className="w-full p-2 border rounded"
               />
-              {formik.touched.description_ar &&
-                formik.errors.description_ar && (
-                  <p className="text-red-500 text-sm">
-                    {formik.errors.description_ar}
-                  </p>
-                )}
+              {formik.touched.description_ar && formik.errors.description_ar && (
+                <p className="text-red-500 text-sm">{formik.errors.description_ar}</p>
+              )}
             </div>
 
             <div>
-              <label className="block font-semibold text-white ">
-                {t("specialprice.descriptionEn")}
-              </label>
+              <label className="block font-semibold text-white ">{t("specialprice.descriptionEn")}</label>
               <input
                 type="text"
                 name="description_en"
@@ -208,20 +190,15 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
                 onBlur={formik.handleBlur}
                 className="w-full p-2 border rounded"
               />
-              {formik.touched.description_en &&
-                formik.errors.description_en && (
-                  <p className="text-red-500 text-sm">
-                    {formik.errors.description_en}
-                  </p>
-                )}
+              {formik.touched.description_en && formik.errors.description_en && (
+                <p className="text-red-500 text-sm">{formik.errors.description_en}</p>
+              )}
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block font-semibold text-white">
-                {t("specialprice.startDate")}
-              </label>
+              <label className="block font-semibold text-white">{t("specialprice.startDate")}</label>
               <input
                 type="date"
                 name="start_date"
@@ -231,16 +208,12 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
                 className="w-full p-2 border rounded"
               />
               {formik.touched.start_date && formik.errors.start_date && (
-                <p className="text-red-500 text-sm">
-                  {formik.errors.start_date}
-                </p>
+                <p className="text-red-500 text-sm">{formik.errors.start_date}</p>
               )}
             </div>
 
             <div>
-              <label className="block font-semibold text-white">
-                {t("specialprice.endDate")}
-              </label>
+              <label className="block font-semibold text-white">{t("specialprice.endDate")}</label>
               <input
                 type="date"
                 name="end_date"
@@ -256,29 +229,39 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
           </div>
 
           <div>
-            <label className="block font-semibold text-white ">
-              {t("specialprice.price")}
-            </label>
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-              disabled={loading}
-            >
-              {loading
-                ? t("specialprice.saving")
-                : editingPriceId
-                ? t("specialprice.updateBtn")
-                : t("specialprice.addBtn")}{" "}
-            </button>
+            <label className="block font-semibold text-white ">{t("specialprice.price")}</label>
+            <input
+              type="number"
+              name="price"
+              value={formik.values.price}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              className="w-full p-2 border rounded"
+            />
+            {formik.touched.price && formik.errors.price && (
+              <p className="text-red-500 text-sm">{formik.errors.price}</p>
+            )}
           </div>
+
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+            disabled={loading}
+          >
+            {loading ? t("specialprice.saving") : editingPriceId ? t("specialprice.updateBtn") : t("specialprice.addBtn")}          </button>
         </form>
 
         {/* قائمة الأسعار الخاصة */}
         <ul className="space-y-4">
-          {specialPrices.map((price) => (
-            <SpecialPriceItem key={price.id} price={price} />
-          ))}
+          {Array.isArray(specialPrices) && specialPrices.length > 0 ? (
+            specialPrices.map((price) => (
+              <SpecialPriceItem key={price.id} price={price} />
+            ))
+          ) : (
+            <p className="text-white text-center">{t("specialprice.noData")}</p>
+          )}
         </ul>
+
       </div>
     </div>
   );
