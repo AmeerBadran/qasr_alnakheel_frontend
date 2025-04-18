@@ -5,6 +5,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 import { MdRoomService } from "react-icons/md";
+import { FcBusinessman } from "react-icons/fc";
 
 
 const sidebarItems = [
@@ -35,21 +36,33 @@ const sidebarItems = [
       label: "sidebar.roomType",
       iconColor: "text-amber-500",
     },
-    
+
     {
       to: "/admin/allservice",
       icon: MdRoomService,
       label: "sidebar.allService",
       iconColor: "text-[#007bff]",
     },
-    
+
     {
       to: "/admin/createroom",
       icon: IoIosAddCircle,
       label: "sidebar.createroom",
     },
     ],
+
   },
+  {
+    linkType: "link",
+    Icon: FaMoneyCheckDollar,
+    data: {
+      to: "/admin/employee",
+      icon: FcBusinessman,
+      label: "sidebar.employee",
+      iconColor: "text-purple-700",
+    },
+  },
+
 ];
 
 export default sidebarItems;

@@ -20,14 +20,11 @@ import Hall from "../pages/Hall";
 import VerificationPage from "../pages/VerificationPage";
 import PersistLogin from "../components/HOC/PersistLogin";
 import NotProtectdRoute from "../components/HOC/withNotProtect";
-
 import SpecialPrice from "../components/molecule/SpecialPrice";
-
-import HotelBookingPage from "../pages/HotelBookingPage";
-import SingleRoom from "../pages/SingleRoom";
+import Employee from "../pages/adminPages/Employee";
 import { HallBooking } from "../pages/HallBooking";
-
-
+import SingleRoom from "../pages/SingleRoom";
+import HotelBookingPage from "../pages/HotelBookingPage";
 const router = createBrowserRouter([
   {
     element: <PersistLogin />,
@@ -77,12 +74,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-  path: "/admin",
+    path: "/admin",
     //element: <ProtectedRoute element={<AdminLayout />} />,
-        element: <AdminLayout />,
+    element: <AdminLayout />,
     children: [
       {
-
         index: true,
         element: <Dashboard />,
       },
@@ -109,7 +105,11 @@ const router = createBrowserRouter([
       {
         path: "specialprice/:id",
         element: <SpecialPrice />,
-      }
+      },
+      {
+        path: "employee",
+        element: <Employee />
+      },
     ],
   },
   // {
@@ -134,7 +134,6 @@ const router = createBrowserRouter([
   //],
   //},
 ]);
-
 export default function AppRouter() {
   return <RouterProvider router={router} />;
 }

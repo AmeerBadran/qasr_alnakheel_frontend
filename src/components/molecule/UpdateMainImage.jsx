@@ -104,7 +104,7 @@ const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, sec
 
   const handleDeleteSecondaryImage = async (image) => {
     try {
-      await deleteSingleRoomImage(mainImageData, image);
+      await deleteSingleRoomImage(image);
 
       toast.success("تم حذف الصورة بنجاح.");
     } catch (error) {
