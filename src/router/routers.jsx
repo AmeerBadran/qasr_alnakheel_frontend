@@ -23,12 +23,8 @@ import NotProtectdRoute from "../components/HOC/withNotProtect";
 import SpecialPrice from "../components/molecule/SpecialPrice";
 import Employee from "../pages/adminPages/Employee";
 import { HallBooking } from "../pages/HallBooking";
-<<<<<<< HEAD
-
-=======
 import SingleRoom from "../pages/SingleRoom";
 import HotelBookingPage from "../pages/HotelBookingPage";
->>>>>>> f4bac936845d33b137ea6141a5ec37f104386ca5
 const router = createBrowserRouter([
   {
     element: <PersistLogin />,
@@ -110,13 +106,10 @@ const router = createBrowserRouter([
         path: "specialprice/:id",
         element: <SpecialPrice />,
       },
-<<<<<<< HEAD
-=======
       {
         path: "employee",
-        element: <Employee />
+        element: <Employee />,
       },
->>>>>>> f4bac936845d33b137ea6141a5ec37f104386ca5
     ],
   },
   // {
