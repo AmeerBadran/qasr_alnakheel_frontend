@@ -34,7 +34,6 @@ export default function Login() {
         .required("Required"),
     }),
     onSubmit: async (values) => {
-      try {
         setLoading(true);
         const response = await logIn(values);
         console.log(response.data.user)
@@ -50,11 +49,6 @@ export default function Login() {
           })
         );
         navigate("/");
-      } catch (error) {
-        console.error(error);
-        setLoading(false);
-        toast.error("Login failed. Please try again.");
-      }
     },
   });
 

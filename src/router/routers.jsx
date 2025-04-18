@@ -20,15 +20,21 @@ import Hall from "../pages/Hall";
 import VerificationPage from "../pages/VerificationPage";
 import PersistLogin from "../components/HOC/PersistLogin";
 import NotProtectdRoute from "../components/HOC/withNotProtect";
+
 import SpecialPrice from "../components/molecule/SpecialPrice";
+
+import HotelBookingPage from "../pages/HotelBookingPage";
+import SingleRoom from "../pages/SingleRoom";
+import { HallBooking } from "../pages/HallBooking";
+
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <RootLayout />,
+    element: <PersistLogin />,
     children: [
       {
-        element: <PersistLogin />,
+        path: "/",
+        element: <RootLayout />,
         children: [
           {
             index: true,
@@ -54,16 +60,29 @@ const router = createBrowserRouter([
             path: "/halls/company",
             element: <Hall hallType="company" />,
           },
+          {
+            path: "/rooms/:id",
+            element: <HotelBookingPage />,
+          },
+          {
+            path: "/rooms/roomdetails/:id",
+            element: <SingleRoom />,
+          },
+          {
+            path: "/hall/bookings/:id",
+            element: <HallBooking />,
+          },
         ],
       },
     ],
   },
   {
-    path: "/admin",
+  path: "/admin",
     //element: <ProtectedRoute element={<AdminLayout />} />,
-    element: <AdminLayout />,
+        element: <AdminLayout />,
     children: [
       {
+
         index: true,
         element: <Dashboard />,
       },
@@ -93,6 +112,9 @@ const router = createBrowserRouter([
       }
     ],
   },
+  // {
+  //element: <PersistLogin />,
+  //children: [
   {
     path: "/login",
     element: <NotProtectdRoute element={<Login />} />,
@@ -109,6 +131,8 @@ const router = createBrowserRouter([
     path: "*",
     element: () => <h1>Page Not Found</h1>,
   },
+  //],
+  //},
 ]);
 
 export default function AppRouter() {

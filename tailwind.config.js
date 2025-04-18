@@ -10,6 +10,7 @@ export default {
     extend: {
       backgroundImage: {
         'Login': "url('/assets/images/Login-background.png')",
+        'about-back': "url('/WhatsApp Image 2024-11-26 at 8.27.36 PM (1).jpeg')"
       },
       boxShadow: {
         'inner-shadow': 'inset 0px 0px 24px 13px rgba(50,255,255,0.3)',
@@ -17,8 +18,13 @@ export default {
       },
       colors: {
         'my-color': '#212121',
-        'sec-color': '#de8e16',
         'admin-color': '#191c24',
+        'sec-color': {
+          100: '#de8e16',
+          200: '#ffae42',
+        },
+        'back-color': '#1c1c1f'
+
       },
     },
     screens: {

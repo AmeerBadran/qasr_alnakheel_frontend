@@ -6,6 +6,7 @@ import sidebar_en from './locales/sidebar/en';
 import sidebar_ar from './locales/sidebar/ar';
 import signUp_en from './locales/signUp/en';
 import signUp_ar from './locales/signUp/ar';
+
 import specialprice_en from './locales/specialprice/en';
 import specialprice_ar from './locales/specialprice/ar';
 import roomoverview_en from './locales/roomoverview/en';
@@ -15,9 +16,19 @@ import updateroom_ar from './locales/updateroom/ar';
 import updatemainimage_en from './locales/updatemainimage/en';
 import updatemainimage_ar from './locales/updatemainimage/ar';
 
+import home_en from './locales/home/en';
+import home_ar from './locales/home/ar';
+import roomAndBooking_en from './locales/roomAndBooking/en';
+import roomAndBooking_ar from './locales/roomAndBooking/ar';
+import hall_en from './locales/hall/en';
+import hall_ar from './locales/hall/ar';
+
 
 const resources = {
   en: {
+    hall: hall_en,
+    home: home_en,
+    roomAndBooking: roomAndBooking_en,
     sidebar: sidebar_en,
     signUp: signUp_en,
     specialprice: specialprice_en,
@@ -325,6 +336,9 @@ const resources = {
     }
   },
   ar: {
+    hall: hall_ar,
+    home: home_ar,
+    roomAndBooking: roomAndBooking_ar,
     sidebar: sidebar_ar,
     signUp: signUp_ar,
     specialprice: specialprice_ar,
@@ -345,7 +359,7 @@ const resources = {
       "familyHallMainTexts": {
         "upperSection": {
           "title": "نظّم احتفالاً عائلياً",
-          "description": "."
+          "description": ""
         },
         "descriptionSection": {
           "title": "الاحتفالات العائلية",

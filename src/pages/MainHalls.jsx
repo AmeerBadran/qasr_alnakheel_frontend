@@ -1,12 +1,15 @@
 import familyHall from "../assets/images/familyHall.jpg";
 import companyHall from "../assets/images/companyHall.jpg";
-import i18n from "../constants/i18n";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 export default function MainHalls() {
+  const { i18n } = useTranslation("halls");
   return (
     <div className="flex flex-col 2md:flex-row ">
       <div
-        className={`relative 2md:w-1/2 w-full 2md:h-[839px] h-[500px] flex flex-col 2md:flex-row items-center justify-center text-white px-4  2md:border-r-2 2md:border-b-0 border-b-2`}
+        className={`relative 2md:w-1/2 w-full 2md:h-[839px] h-[500px] flex flex-col 2md:flex-row items-center justify-center text-white px-4  ${
+          i18n.language === "en" ? "2md:border-r-2" : "2md:border-l-2"
+        } 2md:border-b-0 border-b-2`}
       >
         <img
           src={companyHall}
@@ -29,7 +32,9 @@ export default function MainHalls() {
       </div>
 
       <div
-        className={`relative 2md:w-1/2 w-full 2md:h-[839px] h-[500px] flex flex-col 2md:flex-row items-center justify-center text-white px-4  2md:border-l-2 2md:border-t-0 border-t-2`}
+        className={`relative 2md:w-1/2 w-full 2md:h-[839px] h-[500px] flex flex-col 2md:flex-row items-center justify-center text-white px-4  ${
+          i18n.language === "en" ? "2md:border-l-2" : "2md:border-r-2"
+        } 2md:border-t-0 border-t-2`}
       >
         <img
           src={familyHall}

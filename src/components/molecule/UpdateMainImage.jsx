@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { updateMainImage, addRoomImage, deleteSingleRoomImage } from "../../api/endpoints/room";
 import { useTranslation } from 'react-i18next';
 import { FaTrash } from "react-icons/fa";
+
 import noImage from "../../assets/images/No_Image_Available.jpg"
 const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, secondaryImages }) => {
   const [selectedMainFile, setSelectedMainFile] = useState(null);
@@ -17,11 +18,13 @@ const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, sec
   useEffect(() => {
     if (imageUrl) {
       setMainPreview(imageUrl.image_name_url || imageUrl); // تأكد من الشكل
+
     }
   }, [imageUrl]);
 
   useEffect(() => {
     if (selectedMainFile instanceof File) {
+
       const objectUrl = URL.createObjectURL(selectedMainFile);
       setMainPreview(objectUrl);
       return () => URL.revokeObjectURL(objectUrl);
@@ -42,6 +45,7 @@ const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, sec
 
     const previewUrl = URL.createObjectURL(file);
     setMainPreview(previewUrl);
+
   };
 
   const handleSecondaryFileChange = (e) => {
@@ -67,6 +71,7 @@ const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, sec
     setMainLoading(true);
     try {
       const response = await updateMainImage(mainImageData, formData);
+
       toast.success(response.data.message || "تم تحديث الصورة بنجاح.");
       setTimeout(onClose, 2000);
     } catch (error) {
@@ -100,6 +105,7 @@ const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, sec
   const handleDeleteSecondaryImage = async (image) => {
     try {
       await deleteSingleRoomImage(mainImageData, image);
+
       toast.success("تم حذف الصورة بنجاح.");
     } catch (error) {
       console.error("خطأ في حذف الصورة:", error);
@@ -115,6 +121,7 @@ const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, sec
         <div className="flex justify-between items-center mb-4 ">
           <h2 className="text-xl font-bold text-white">{t("updateMainImage")}</h2>
           <button onClick={onClose} className="text-red-500 font-bold text-xl">X</button>
+
         </div>
 
         {/* تحديث الصورة الرئيسية */}
@@ -122,6 +129,7 @@ const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, sec
 
           <div className="mb-4">
             <label className="block font-medium text-white">{t("choosefile")}</label>
+
             <input
               type="file"
               accept="image/jpeg, image/jpg, image/png"
@@ -148,14 +156,17 @@ const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, sec
         {/* الصور الثانوية */}
         <div className="mt-6 border-t p-4">
           <h3 className="text-white mb-4 text-xl font-semibold">{t("secondaryImages")}</h3>
+
           <div className="flex flex-wrap gap-4">
             {secondaryImages && secondaryImages.length > 0 ? (
               secondaryImages.map((image, index) => (
                 <div key={index} className="relative">
+
                   <img src={image.image_name_url} alt="Secondary" className="w-24 h-24 object-cover rounded" />
                   <button
                     onClick={() => handleDeleteSecondaryImage(image.id)}
                     className="absolute top-2 right-2 bg-red-500/60 text-white rounded-full w-6 h-6 flex items-center justify-center hover:bg-red-600"
+
                   >
                     <FaTrash size={12} />
                   </button>
@@ -163,6 +174,7 @@ const UpdateMainImage = ({ isOpen, onClose, mainImageData, roomId, imageUrl, sec
               ))
             ) : (
               <img src={noImage} alt="noImage" className="rounded-md w-24 h-24" />
+
             )}
           </div>
 

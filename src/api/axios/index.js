@@ -22,10 +22,13 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response) {
       const status = error.response.status;
-      
+      const message = error.response.data.message || `Error ${status}: Something went wrong`;
+
       if (status >= 400 && status < 500) {
-        const message = error.response.data.message || `Error ${status}: Something went wrong`;
-        toast.error(message);
+        if (message !== "Token not found") {
+          const message = error.response.data.message || `Error ${status}: Something went wrong`;
+          toast.error(message);
+        }
       } else {
         toast.error("An unexpected error occurred. Please try again.");
       }

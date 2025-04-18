@@ -2,32 +2,21 @@
 
 import { motion } from "framer-motion";
 
-const BouncingImage = ({
-  children,
-  animationType = "bouncey",
-  duration = 5,
-  repeat = Infinity,
-  easing = "easeInOut",
-  className = "",
-}) => {
-  const animations = {
-    bouncex: { x: [-10, 10, -10] },
-    bouncey: { y: [0, -20, 0] },
-    rotate: { rotate: [0, 360] },
-  };
-
+const BouncingImage = ({ image }) => {
   return (
     <motion.div
-      className={` ${className}`}
-      animate={animations[animationType] || animations.bouncey}
+      className="border-8 rounded-2xl shadow-lg shadow-gray-500"
+      animate={{ y: [0, -15, 0] }}
       transition={{
-        duration,
-        repeat,
+        duration: 5,
+        repeat: Infinity,
         repeatType: "loop",
-        ease: easing,
+        ease: "easeInOut",
       }}
     >
-      {children}
+      <div className="shadow-inner-shadow shadow-white/20 p-5">
+        <img src={image} alt="Bouncing Image" className="rounded-xl" />
+      </div>
     </motion.div>
   );
 };

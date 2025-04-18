@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { updateRoomById, getRoomById, getRoomPrice, updateRoomPricing, roomTypeData, serviceData } from "../../api/endpoints/room";
+
 import { toast } from 'react-toastify';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -48,6 +49,7 @@ const UpdateRoom = () => {
             bed_type_en: '',
             pricing: weekDays.map(day => ({ day, price: 0, id: null })),
             services: []
+
         },
 
         enableReinitialize: true,
@@ -55,16 +57,11 @@ const UpdateRoom = () => {
             const pricingPayload = {
                 pricing: values.pricing.map(item => ({ day: item.day, price: Number(item.price) }))
             };
-
-            // إنشاء FormData
             const formData = new FormData();
-
-            // إضافة البيانات إلى FormData
             await Promise.all([
                 updateRoomById(id, values),
                 updateRoomPricing(id, pricingPayload)
             ]);
-
             // إضافة الخدمات إلى formData
             values.services.forEach((serviceId, index) => {
                 formData.append(`services[${index}]`, serviceId);
@@ -74,6 +71,7 @@ const UpdateRoom = () => {
             // await axiosInstance.post('/path/to/api', formData);
 
             toast.success('Room data updated successfully!');
+
 
         },
 
@@ -147,6 +145,7 @@ const UpdateRoom = () => {
                     <select name="type" className="p-2 rounded bg-gray-700 w-full text-white" onChange={formik.handleChange} value={formik.values.type}>
                         <option value="">{t('createroom.select_default')}</option>
                         {roomType.length > 0 && roomType.map((type) => (
+
                             <option key={type.id} value={type.id}>{type.name[i18n.language] || type.name.en}</option>
                         ))}
                     </select>
@@ -156,6 +155,7 @@ const UpdateRoom = () => {
                 ))}
                 <div className="col-span-full my-4">
                     <h3 className="text-xl font-semibold text-white my-4">{t('singleUpdateroom.update_room.price')}</h3>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {formik.values.pricing && formik.values.pricing.map((dayData, index) => (
                             <div key={dayData.day} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
@@ -195,12 +195,14 @@ const UpdateRoom = () => {
                         })}
                     </div>
                 </div>
-
                 <div className="col-span-full flex gap-4">
+
                     <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded">{t('singleUpdateroom.update_room.update') || 'Update'}</button>
+
                 </div>
                 
             </form>
+
             <UpdateMainImage isOpen={isModalOpen} secondaryImages={secondaryImages2} onClose={() => setIsModalOpen(false)} imageUrl={imageUrl} roomId={id} mainImageData={mainImageState} />
 
         </div>
@@ -244,11 +246,89 @@ const Input = ({ name, value, onChange }) => {
                 onChange={handleChange}
                 className="w-full p-2 border rounded"
             />
+
         </div>
     );
 };
+const SpecialPriceModal = ({ isOpen, onClose, roomId }) => {
+    const [specialPrices, setSpecialPrices] = useState([]);
+    const [price, setPrice] = useState('');
+    const [date, setDate] = useState('');
+    const [updatingId, setUpdatingId] = useState(null);
 
+    const fetchSpecialPrices = async () => {
+        try {
+            const res = await getAllSpecialPrice();
+            const filtered = res.data.filter(p => p.roomId === Number(roomId));
+            setSpecialPrices(filtered);
+        } catch (err) {
+            toast.error(err?.response?.data?.message || "فشل في جلب الأسعار الخاصة");
+        }
+    };
+    
 
+    useEffect(() => {
+        if (isOpen) {
+            fetchSpecialPrices();
+            setPrice('');
+            setDate('');
+            setUpdatingId(null);
+        }
+    }, [isOpen]);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const payload = { roomId, price, date };
+        try {
+            if (updatingId) {
+                await updateSpecialPrice(updatingId, payload);
+                toast.success("تم تحديث السعر بنجاح");
+            } else {
+                await addSpecialPrice(payload);
+                toast.success("تمت إضافة السعر بنجاح");
+            }
+            fetchSpecialPrices();
+            setPrice('');
+            setDate('');
+            setUpdatingId(null);
+        } catch (err) {
+            toast.error(err?.response?.data?.message || "حدث خطأ أثناء الحفظ");
+        }
+    };
+    
+    const handleEdit = (price) => {
+        setUpdatingId(price.id);
+        setPrice(price.price);
+        setDate(price.date);
+    };
 
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded-lg w-full max-w-xl">
+                <h2 className="text-xl font-bold mb-4 text-center">إدارة السعر الخاص</h2>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="w-full border p-2 rounded" required />
+                    <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} className="w-full border p-2 rounded" required />
+                    <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" type="submit">
+                        {updatingId ? "تحديث" : "إضافة"}
+                    </button>
+                </form>
+                <h3 className="mt-6 font-semibold">الأسعار الحالية</h3>
+                <ul className="mt-2 max-h-40 overflow-y-auto space-y-2">
+                    {specialPrices.map(p => (
+                        <li key={p.id} className="flex justify-between items-center bg-gray-100 p-2 rounded">
+                            <span>{p.date}: {p.price} ₪</span>
+                            <button onClick={() => handleEdit(p)} className="text-blue-600 hover:underline">تعديل</button>
+                        </li>
+                    ))}
+                </ul>
+                <div className="text-right mt-4">
+                    <button onClick={onClose} className="text-red-600 hover:underline">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default UpdateRoom;

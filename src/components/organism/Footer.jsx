@@ -23,14 +23,25 @@ export default function Footer() {
             </p>
           </div>
           <div className="2md:w-1/5 mb-6 md:mb-0 mt-5">
-            <h3 className=" font-semibold mb-3">Website Pages</h3>
-            <ul className="flex flex-col flex-1 gap-4 justify-start items-start w-full">
+            <h3 className=" font-semibold text-lg mb-3">Website Pages</h3>
+            <ul className="flex flex-col flex-1 gap-3 justify-start items-start w-full">
               {/* <NavLinks linksLayout={"halfPage"} bgColor={"footer"} /> */}
+
+              <li>Home</li>
+              <li>About Us</li>
+              <li>Room</li>
+              <li>Restaurant</li>
+              <li>News & Media</li>
             </ul>
           </div>
           <div className="2md:w-1/5 mb-6 md:mb-0 mt-5">
-            <h3 className="font-semibold mb-3">Social Media</h3>
+            <h3 className="font-semibold mb-3 text-lg">Contact Us</h3>
             {/* <SocialLinks /> */}
+            <div>
+              <p>Qasr Al-Nakheel, Udhailiyah</p>
+              <p>Contact: 00966</p>
+              <p>admin@qasrnakheel.com</p>
+            </div>
           </div>
         </div>
         <div className="border-t border-gray-700 mt-6 pt-6 text-center">

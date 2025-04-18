@@ -27,7 +27,7 @@ jobs:
         run: npm run build
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v2  # ✅ تم التحديث من v3 إلى v2
+        uses: actions/upload-artifact@v3
         with:
           name: production-files
           path: ./dist

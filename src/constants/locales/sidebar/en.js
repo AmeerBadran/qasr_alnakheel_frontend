@@ -7,6 +7,13 @@ export default {
         allService: "All Service",
         allRoom: "All Rooms",
         createroom: "Create Room",
-        
+    },
+    navbar: {
+        home: "Home",
+        aboutUs: "About Us",
+        contactUs: "Contact Us",
+        room: "Room Booking",
+        admin: "Admin",
+        halls: "Halls",
     },
 };

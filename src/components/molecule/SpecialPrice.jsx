@@ -1,3 +1,4 @@
+
 /* eslint-disable no-unused-vars */
 
 /* eslint-disable react/prop-types */
@@ -13,9 +14,11 @@ import SpecialPriceItem from "../organism/SpecialPriceItem";
 const SpecialPrice = ({ isOpen, onClose, roomId }) => {
   const { t, i18n } = useTranslation("specialprice");
   const lang = i18n.language || "en";
+
   const [specialPrices, setSpecialPrices] = useState([]);
   const [editingPriceId, setEditingPriceId] = useState(null);
   const [loading, setLoading] = useState(false);
+
 
 
 
@@ -102,6 +105,7 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
         } else {
           await addSpecialPrice(payload); // This sends the room ID for creating a new special price
           toast.success(t("specialprice.addSuccess"))
+
         }
 
         fetchPrices();
@@ -132,6 +136,7 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
 
         {/* Form */}
         <form onSubmit={formik.handleSubmit} className="space-y-4">
+
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block font-semibold text-white">{t("specialprice.nameAr")}</label>
@@ -228,24 +233,12 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
 
           <div>
             <label className="block font-semibold text-white ">{t("specialprice.price")}</label>
-            <input
-              type="number"
-              name="price"
-              value={formik.values.price}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className="w-full p-2 border rounded"
-            />
-            {formik.touched.price && formik.errors.price && (
-              <p className="text-red-500 text-sm">{formik.errors.price}</p>
-            )}
-          </div>
-
           <button
             type="submit"
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
             disabled={loading}
           >
+
             {loading ? t("specialprice.saving") : editingPriceId ? t("specialprice.updateBtn") : t("specialprice.addBtn")}          </button>
         </form>
 
@@ -255,6 +248,7 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
             <SpecialPriceItem key={price.id} price={price} />
           ))}
         </ul>
+
       </div>
     </div>
   );
