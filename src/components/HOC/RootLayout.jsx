@@ -6,7 +6,7 @@ export default function RootLayout() {
     <div className=" absolute w-full">
       <Navbar />
 
-      <div className="mt-24 bg-slate-400">
+      <div className="mt-24 bg-slate-400 drop-shadow-md">
         <Outlet />
       </div>
       <Footer/>

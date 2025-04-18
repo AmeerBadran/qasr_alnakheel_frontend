@@ -10,4 +10,13 @@ export default {
         employee: "الموظف",
 
     },
+    navbar: {
+        home: "الرئيسية",
+        aboutUs: "من نحن",
+        contactUs: "اتصل بنا",
+        room: "حجز الغرف",
+        admin: "الإدارة",
+        halls: "القاعات",
+    },
+
 };

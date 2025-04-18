@@ -8,6 +8,13 @@ export default {
         allRoom: "All Rooms",
         createroom: "Create Room",
         employee: "Employee",
-
+    },
+    navbar: {
+        home: "Home",
+        aboutUs: "About Us",
+        contactUs: "Contact Us",
+        room: "Room Booking",
+        admin: "Admin",
+        halls: "Halls",
     },
 };

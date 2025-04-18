@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveAuthData } from "../../features/authData/authDataSlice";
-import ReactLoading from "react-loading";
 import { getUserData } from "../../api/endpoints/auth";
 import { useNavigate } from "react-router-dom";
+import { Mosaic } from "react-loading-indicators";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -24,7 +24,6 @@ export default function PersistLogin() {
     async function refreshUserData() {
       try {
         const response = await getUserData();
-        console.log(response.data.user);
         dispatch(
           saveAuthData({
             userId: response.data.user.id,
@@ -34,7 +33,7 @@ export default function PersistLogin() {
         );
         // eslint-disable-next-line no-unused-vars
       } catch (error) {
-        navigate("/login");
+        navigate("/");
       } finally {
         setLoading(false);
       }
@@ -43,8 +42,8 @@ export default function PersistLogin() {
   }, [dispatch, navigate]);
 
   return loading ? (
-    <div className="w-screen h-screen flex justify-center items-center bg-gray-900 bg-opacity-50">
-      <ReactLoading type="spin" color="black" height={200} width={110} />
+    <div className="w-full h-screen flex justify-center items-center bg-my-color">
+      <Mosaic color={["#7a6a1d", "#a38d27", "#ccb131", "#d7c159"]} />
     </div>
   ) : (
     <>

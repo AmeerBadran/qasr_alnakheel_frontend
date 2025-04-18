@@ -22,12 +22,14 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
   async function fetchPrices() {
     try {
       const response = await getAllSpecialPriceById(roomId);
-      console.log(response.data);
-      setSpecialPrices(response.data);
-      console.log(response.data);
+      const data = response.data;
+
+      // تأكد أن البيانات مصفوفة، وإلا خليها مصفوفة فاضية
+      setSpecialPrices(Array.isArray(data) ? data : []);
     } catch (err) {
       toast.error(t("specialprice.fetchError"));
       console.error(err);
+      setSpecialPrices([]); // fallback حتى لو فشل الطلب
     }
   }
 
@@ -251,10 +253,15 @@ const SpecialPrice = ({ isOpen, onClose, roomId }) => {
 
         {/* قائمة الأسعار الخاصة */}
         <ul className="space-y-4">
-          {specialPrices.map((price) => (
-            <SpecialPriceItem key={price.id} price={price} />
-          ))}
+          {Array.isArray(specialPrices) && specialPrices.length > 0 ? (
+            specialPrices.map((price) => (
+              <SpecialPriceItem key={price.id} price={price} />
+            ))
+          ) : (
+            <p className="text-white text-center">{t("specialprice.noData")}</p>
+          )}
         </ul>
+
       </div>
     </div>
   );

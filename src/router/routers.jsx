@@ -22,13 +22,16 @@ import PersistLogin from "../components/HOC/PersistLogin";
 import NotProtectdRoute from "../components/HOC/withNotProtect";
 import SpecialPrice from "../components/molecule/SpecialPrice";
 import Employee from "../pages/adminPages/Employee";
+import { HallBooking } from "../pages/HallBooking";
+import SingleRoom from "../pages/SingleRoom";
+import HotelBookingPage from "../pages/HotelBookingPage";
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <RootLayout />,
+    element: <PersistLogin />,
     children: [
       {
-        element: <PersistLogin />,
+        path: "/",
+        element: <RootLayout />,
         children: [
           {
             index: true,
@@ -53,6 +56,18 @@ const router = createBrowserRouter([
           {
             path: "/halls/company",
             element: <Hall hallType="company" />,
+          },
+          {
+            path: "/rooms/:id",
+            element: <HotelBookingPage />,
+          },
+          {
+            path: "/rooms/roomdetails/:id",
+            element: <SingleRoom />,
+          },
+          {
+            path: "/hall/bookings/:id",
+            element: <HallBooking />,
           },
         ],
       },
@@ -94,10 +109,12 @@ const router = createBrowserRouter([
       {
         path: "employee",
         element: <Employee />
-      }
-
+      },
     ],
   },
+  // {
+  //element: <PersistLogin />,
+  //children: [
   {
     path: "/login",
     element: <NotProtectdRoute element={<Login />} />,
@@ -114,8 +131,9 @@ const router = createBrowserRouter([
     path: "*",
     element: () => <h1>Page Not Found</h1>,
   },
+  //],
+  //},
 ]);
-
 export default function AppRouter() {
   return <RouterProvider router={router} />;
 }
