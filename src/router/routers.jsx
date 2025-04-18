@@ -27,7 +27,6 @@ import HotelBookingPage from "../pages/HotelBookingPage";
 import SingleRoom from "../pages/SingleRoom";
 import { HallBooking } from "../pages/HallBooking";
 
-
 const router = createBrowserRouter([
   {
     element: <PersistLogin />,
@@ -77,12 +76,11 @@ const router = createBrowserRouter([
     ],
   },
   {
-  path: "/admin",
+    path: "/admin",
     //element: <ProtectedRoute element={<AdminLayout />} />,
-        element: <AdminLayout />,
+    element: <AdminLayout />,
     children: [
       {
-
         index: true,
         element: <Dashboard />,
       },
@@ -109,7 +107,7 @@ const router = createBrowserRouter([
       {
         path: "specialprice/:id",
         element: <SpecialPrice />,
-      }
+      },
     ],
   },
   // {
